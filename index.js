@@ -1,11 +1,24 @@
-const app = require('express')();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const path = require('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const http = require('http');
+const socketIo = require('socket.io');
+
+const app = express();
+const server = http.Server(app);
+const io = socketIo(server);
 
 
+app.use(express.static(path.join(__dirname, 'dist')));
+
+// for react-router
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
+
+// tell the app to parse HTTP body messages
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 
 io.on('connection', (socket) => {
@@ -18,24 +31,10 @@ io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
     io.emit('chat message', msg);
   });
-
 });
 
+const PORT = process.env.PORT || 3001;
 
-http.listen(3000, () => {
-  console.log('Listening on port 3000');
+server.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
-
-
-
-
-.node-webform input[type=checkbox] {
-  width: auto;
-}
-.feedback__form-wrap form .form-item input[type=checkbox] {
-  width: auto !important;
-}
-form .form-item input[type=checkbox] {
-  width: auto !important;
-}
-

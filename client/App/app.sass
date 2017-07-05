@@ -1,0 +1,24 @@
+@import 'styles/partials'
+
+//________ SUPPORT CLASSES ________
+
+  // Max width for content (container for content)
+.content-width
+  max-width: $w-content_max
+  min-width: $w-min
+  margin: 0 auto
+
+  // paddings when viewport width <= content
+  @media only screen and (max-width : $w-content_padding)
+    padding-left: 15px
+    padding-right: 15px
+
+.clearfix
+  &:before
+    content: ""
+    display: table
+
+  &:after
+    content: ""
+    display: table
+    clear: both

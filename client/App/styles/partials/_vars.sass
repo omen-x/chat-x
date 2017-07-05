@@ -1,0 +1,122 @@
+
+//________ VARIABLES ________
+
+// Width
+
+$w-content_max: 940px
+$w-content_padding: ($w-content_max / 1px + 30)*1px
+$w-min: 320px
+
+
+// Fonts
+
+$f-main: 'OpenSans', 'Helvetica', 'Arial', sans-serif
+$fs-main: 100%
+$fs-root: 16
+
+
+// Colors
+
+$c-accent: #dc8338
+$c-accent_d: darken($c-accent, 10%)
+$c-accent_l: lighten($c-accent, 10%)
+
+$c-text: #424242
+$c-link: #FFF
+
+$c-bg-body: #F3F3F3
+$c-bg-light: #E4E4E4
+
+$c-placeholder: #BABABA
+$c-placeholder_active: #000
+$c-placeholder_invalid: #FC5E5E
+
+
+// Gradients
+
+
+// Box-shadow
+
+
+// Gutters
+
+
+// Borders
+
+
+//________ MIXINS ________
+
+
+  // Media in em's, without units
+  // @param {Number} $width - Width in px, without units
+
+@mixin media-max($width)
+  @media only screen and (max-width : $width / $fs-root * 1em)
+    @content
+
+@mixin media-min($width)
+  @media only screen and (min-width : $width / $fs-root * 1em)
+    @content
+
+
+  // Height relative to width, for empty block
+  // based on pseudoclass with padding
+  // useful for img-containers
+
+@mixin height-empty($height)
+  position: relative
+  overflow: hidden
+
+  &:before
+    content: ''
+    display: block
+    position: relative
+    opacity: 0
+    padding-top: $height+%
+
+
+  // Height relative to width, for not empty block
+  // if for container using paddings they won't inlcuded in this height
+  // TODO: problem with border too! when included
+
+@mixin height($height)
+  overflow: hidden
+
+  &:before
+    content: ''
+    float: left
+    padding-top: $height+%
+
+
+//________ FUNCTIONS ________
+
+  /// Define property's in em's, rem's
+  /// @param {Number} $pix - Value of required value (units are not needed)
+  /// @param {Number} [$parent = 16] - Value of parent's block (omit if it's default),
+  ///         if you define line-height - you must always indicate this param with the value
+  ///         of font-size, which have this element (not parent)
+  ///         if font-size of parent is '0', don't use this func
+  /// @returns {Value in em, rem}
+
+@function em($pix, $parent: ($fs-main/1px))
+  @return ($pix/$parent)*1em
+
+
+@function rem($pix)
+  @return ($pix / $fs-root)*1rem
+
+
+
+  /// Set css-property(measured in px) in proportion to viewport width (between 2 breakpoints)
+  /// @param {Number} $to - Min value of css-property (with px)
+  /// @param {Number} $from - Max value of css-property (with px)
+  /// @param {Number} $toWidth - Min breqkpoint (width px)
+  /// @param {Number} $fromWidth - Max breqkpoint (width px)
+  /// @return {calc function}
+
+@function between($to, $from, $toWidth, $fromWidth)
+  $slope: ($to - $from) / ($toWidth - $fromWidth)
+  $base: $from - $slope * $fromWidth
+
+  @return calc(#{$base} + #{100vw * $slope})
+

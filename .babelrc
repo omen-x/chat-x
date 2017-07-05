@@ -1,0 +1,13 @@
+{
+  "presets": ["env", "react", "stage-0"],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"]
+    }
+  },
+  "plugins": [
+    "add-module-exports",
+    "transform-es2015-modules-commonjs",
+    ["lodash", { "id": ["lodash", "semantic-ui-react"] }]
+  ]
+}

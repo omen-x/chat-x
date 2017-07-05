@@ -1,16 +1,150 @@
 {
-  "name": "chat",
+  "name": "chat-x",
   "version": "1.0.0",
-  "description": "",
+  "description": "instant messaging app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cross-env NODE_ENV=production webpack",
+    "client": "cross-env NODE_ENV=development nodemon --watch webpack.config.js --exec  webpack-dev-server",
+    "server": "nodemon index.js --exec babel-node",
+    "start": "",
+    "test": "jest --watch"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/omen-x/chat-x"
+  },
+  "author": "Denis Volok",
+  "homepage": "https://github.com/omen-x/chat-x",
+  "license": "MIT",
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true,
+      "jest": true
+    },
+    "parser": "babel-eslint",
+    "plugins": [
+      "react"
+    ],
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    },
+    "extends": "airbnb",
+    "rules": {
+      "no-unused-vars": "warn",
+      "semi": "warn",
+      "spaced-comment": 0,
+      "indent": 0,
+      "comma-dangle": 0,
+      "func-names": "warn",
+      "newline-per-chained-call": 0,
+      "no-underscore-dangle": 0,
+      "no-console": 0,
+      "class-methods-use-this": "warn",
+      "import/first": 0,
+      "allowTernary": 0,
+      "array-callback-return": 0,
+      "react/jsx-filename-extension": 0
+    }
+  },
+  "browserslist": [
+    "last 3 versions",
+    "not ie < 10"
+  ],
+  "postcss": {
+    "plugins": {
+      "postcss-import": {},
+      "css-mqpacker": {},
+      "autoprefixer": {},
+      "cssnano": {}
+    }
+  },
+  "jest": {
+    "resolver": "jest-webpack-resolver",
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "modulePaths": [
+      "__mock__"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "fileMock.js",
+      "\\.(css|sass)$": "styleMock.js"
+    },
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-eslint": "^6.1.2",
+    "babel-jest": "^20.0.3",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-env": "^1.2.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.16",
+    "cross-env": "^5.0.1",
+    "css-loader": "^0.28.4",
+    "css-mqpacker": "^6.0.1",
+    "cssnano": "^3.10.0",
+    "enzyme": "^2.9.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-import-resolver-webpack": "^0.8.3",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1",
+    "eslint-plugin-react": "^7.0.1",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^0.11.2",
+    "friendly-errors-webpack-plugin": "^1.6.1",
+    "html-loader": "^0.4.5",
+    "html-webpack-plugin": "^2.28.0",
+    "imagemin-mozjpeg": "^6.0.0",
+    "imagemin-pngquant": "^5.0.1",
+    "imagemin-webpack-plugin": "^1.4.4",
+    "jest": "^20.0.4",
+    "jest-cli": "^20.0.4",
+    "jest-webpack-resolver": "0.0.1",
+    "lodash-webpack-plugin": "^0.11.4",
+    "node-sass": "^4.5.3",
+    "postcss-import": "^10.0.0",
+    "postcss-load-config": "^1.2.0",
+    "postcss-loader": "^2.0.6",
+    "react-test-renderer": "^15.6.1",
+    "sass-loader": "^6.0.5",
+    "sinon": "^2.3.5",
+    "style-loader": "^0.18.2",
+    "webpack": "^2.6.1",
+    "webpack-archive-plugin": "^3.0.0",
+    "webpack-config-utils": "^2.3.0",
+    "webpack-dev-server": "^2.4.5"
+  },
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "lodash": "^4.17.4",
+    "node-notifier": "^5.1.2",
+    "pretty": "^2.0.0",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.1",
     "socket.io": "^2.0.3"
   }
 }
