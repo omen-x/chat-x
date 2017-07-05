@@ -1,0 +1,9 @@
+node_modules
+docs
+semantic.json
+*.psd
+documents
+docs
+ftpsync.settings
+dist
+dist.zip
