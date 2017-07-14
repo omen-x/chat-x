@@ -9,8 +9,8 @@ export const COLORS = {
   accent: '#dc8338',
 };
 
+const socket = io();
 
-// const App = () => (<BrowserRouter>{routes}</BrowserRouter>);
 const App = () => (<BrowserRouter>{routes}</BrowserRouter>);
 
 export default App;

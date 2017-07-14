@@ -4,10 +4,10 @@
   "description": "instant messaging app",
   "main": "index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
-    "client": "cross-env NODE_ENV=development nodemon --watch webpack.config.js --exec  webpack-dev-server",
-    "server": "nodemon index.js --exec babel-node",
     "start": "",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev-client": "cross-env NODE_ENV=development nodemon --watch webpack.config.js --exec  webpack-dev-server",
+    "dev-server": "nodemon index.js --exec babel-node",
     "test": "jest --watch"
   },
   "repository": {

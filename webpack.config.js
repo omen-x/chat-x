@@ -172,6 +172,10 @@ if (process.env.NODE_ENV === 'production') {
     publicPath: '/',
     compress: true,
     historyApiFallback: true, // problem with nested routes
+    proxy: {
+      '/api/*': 'http://localhost:8080',
+      '/socket.io/*': 'http://localhost:8080'
+    },
     stats: {
       assetsSort: 'size',
       assets: false,
