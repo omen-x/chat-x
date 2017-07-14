@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Home from 'client/HomePage/Home'; // eslint-disable-line
+import Chat from 'client/Chat/Chat'; // eslint-disable-line
 
 
 const routes = (
   <Switch>
-    <Route path="/" exact component={Home} />
+    <Route path="/" exact component={Chat} />
   </Switch>
 );
 

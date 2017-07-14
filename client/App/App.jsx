@@ -5,11 +5,11 @@ import routes from './routes';
 import './app.sass';
 
 
-export const COLORS = {
-  accent: '#dc8338',
+export const colors = {
+  accent: '#28AFCC',
 };
 
-const socket = io();
+// const socket = io();
 
 const App = () => (<BrowserRouter>{routes}</BrowserRouter>);
 

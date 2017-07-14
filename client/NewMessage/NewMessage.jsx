@@ -1,8 +1,6 @@
 import React from 'react';
 
-import './home.sass';
-
-class Home extends React.Component {
+class NewMessage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -11,9 +9,9 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div></div>
+      <div>new message</div>
     );
   }
 }
 
-export default Home;
+export default NewMessage;

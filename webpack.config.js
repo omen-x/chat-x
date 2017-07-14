@@ -26,7 +26,7 @@ const config = {
   },
   devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.sass'],
     alias: {
       client: path.resolve(__dirname, 'client'),
       partialsCss: path.resolve(__dirname, 'client/App/styles/partials'),
@@ -51,14 +51,30 @@ const config = {
         ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-          { loader: 'css-loader', options: { importLoader: 1, sourceMap: true } },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoader: 1,
+              sourceMap: true,
+              modules: true,
+              // localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
           { loader: 'postcss-loader', options: { sourceMap: true } },
           ],
           publicPath: '../'
         }),
         [
           { loader: 'style-loader' },
-          { loader: 'css-loader', options: { importLoader: 1, sourceMap: true } },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoader: 1,
+              sourceMap: true,
+              modules: true,
+              // localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
           { loader: 'postcss-loader', options: { sourceMap: true } },
         ]
       )
@@ -69,7 +85,15 @@ const config = {
         ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-          { loader: 'css-loader', options: { importLoader: 1, sourceMap: true } },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoader: 1,
+              sourceMap: true,
+              modules: true,
+              // localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
           { loader: 'postcss-loader', options: { sourceMap: true } },
           { loader: 'sass-loader', options: { includePaths: ['./client'], sourceMap: true } }
           ],
@@ -77,7 +101,15 @@ const config = {
         }),
         [
           { loader: 'style-loader' },
-          { loader: 'css-loader', options: { importLoader: 1, sourceMap: true } },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              sourceMap: true,
+              modules: true,
+              // localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
           { loader: 'postcss-loader', options: { sourceMap: true } },
           { loader: 'sass-loader', options: { includePaths: ['./client'], sourceMap: true } }
         ]

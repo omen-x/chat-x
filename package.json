@@ -7,7 +7,7 @@
     "start": "",
     "build": "cross-env NODE_ENV=production webpack",
     "dev-client": "cross-env NODE_ENV=development nodemon --watch webpack.config.js --exec  webpack-dev-server",
-    "dev-server": "nodemon index.js --exec babel-node",
+    "dev-server": "nodemon index.js --ignore 'client/**/*' --exec babel-node",
     "test": "jest --watch"
   },
   "repository": {
@@ -23,6 +23,9 @@
       "node": true,
       "es6": true,
       "jest": true
+    },
+    "globals": {
+      "io": true
     },
     "parser": "babel-eslint",
     "plugins": [

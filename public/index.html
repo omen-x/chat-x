@@ -9,11 +9,6 @@
     <meta name="msapplication-tap-highlight" content="no">
   </head>
   <body>
-    <script>
-      var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0));
-      if (isTouch) document.body.classList.add('touch');
-      else document.body.classList.add('no-touch');
-    </script>
     <div id="root"></div>
     <script src="/socket.io/socket.io.js"></script>
   </body>
