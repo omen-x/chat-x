@@ -1,17 +1,16 @@
 import React from 'react';
 
-class NewMessage extends React.Component {
-  constructor(props) {
-    super(props);
+import styles from './NewMessage.sass';
 
-    this.title = 'Title';
-  }
 
-  render() {
-    return (
-      <div>new message</div>
-    );
-  }
-}
+const NewMessage = () => (
+  <div className={styles.newMessage}>
+    <form>
+      <input type="text" />
+      <input type="submit" value="" />
+    </form>
+  </div>
+);
+
 
 export default NewMessage;

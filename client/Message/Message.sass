@@ -1,8 +1,35 @@
+@import '~cssVars'
 
 .message
-  border: 1px solid
-  padding: 10px 15px
-  margin-bottom: 20px
+  display: flex
+  border-bottom: 1px solid  $c-border-light
+  padding: 20px 35px 35px 20px
+  background: #FFF
 
-  &:nth-child(even)
-    background: #D3D3D3
+.avatar
+  flex-shrink: 0
+  max-width: 45px
+  border-radius: 50%
+  margin-right: 40px
+
+.content
+  display: flex
+  flex-flow: row wrap
+  flex-grow: 1
+
+.author
+  margin-bottom: 20px
+  font-size: rem(19)
+  font-weight: 500
+  font-family: $f-title
+  color: $c-accent
+
+.date
+  opacity: .7
+  margin-left: auto
+  font-size: rem(15)
+  font-family: $f-title
+
+.text
+  width: 85%
+  line-height: 1.3

@@ -1,0 +1,41 @@
+@import '~cssVars'
+
+.newMessage
+  padding: 10px
+  background: #fff
+
+  form
+    display: flex
+    justify-content: space-between
+
+    input
+      outline: none
+
+    input[type=text]
+      width: 87%
+      border: 1px solid  $c-accent
+      padding: 8px 12px
+      transition: box-shadow .25s
+
+      &:focus
+        box-shadow: inset 0 0 2px  rgba($c-accent, .7)
+
+    input[type=submit]
+      width: calc(13% - 10px)
+      background-color: $c-accent
+      background-position: center
+      background-repeat: no-repeat
+      background-size: 20px auto
+      transition: background-color .2s
+
+      &:hover
+        background-color: $c-accent_l
+
+      &:active
+        background-color: $c-accent_d
+
+.newMessage :global
+  form
+    input[type=submit]
+      background-image: url('./send.svg')
+

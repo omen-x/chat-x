@@ -2,6 +2,8 @@ import React from 'react';
 
 import Users from 'client/Users/Users'; // eslint-disable-line
 import Dashboard from 'client/Dashboard/Dashboard'; // eslint-disable-line
+import styles from './Chat.sass';
+
 
 class Chat extends React.Component {
   constructor(props) {
@@ -11,13 +13,8 @@ class Chat extends React.Component {
   }
 
   render() {
-    const styles = {
-      maxWidth: '940px',
-      margin: '0 auto'
-    };
-
     return (
-      <div style={styles}>
+      <div className={styles.chat}>
 {/*        <Users />
 */}        <Dashboard />
       </div>

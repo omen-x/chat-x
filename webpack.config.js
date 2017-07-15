@@ -54,10 +54,10 @@ const config = {
           {
             loader: 'css-loader',
             options: {
-              importLoader: 1,
+              importLoaders: 2,
               sourceMap: true,
               modules: true,
-              // localIdentName: '[name]__[local]___[hash:base64:5]'
+              localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
           { loader: 'postcss-loader', options: { sourceMap: true } },
@@ -69,10 +69,10 @@ const config = {
           {
             loader: 'css-loader',
             options: {
-              importLoader: 1,
+              importLoaders: 2,
               sourceMap: true,
               modules: true,
-              // localIdentName: '[name]__[local]___[hash:base64:5]'
+              localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
           { loader: 'postcss-loader', options: { sourceMap: true } },
@@ -88,10 +88,10 @@ const config = {
           {
             loader: 'css-loader',
             options: {
-              importLoader: 1,
+              importLoaders: 2,
               sourceMap: true,
               modules: true,
-              // localIdentName: '[name]__[local]___[hash:base64:5]'
+              localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
           { loader: 'postcss-loader', options: { sourceMap: true } },
@@ -104,10 +104,10 @@ const config = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1,
+              importLoaders: 2,
               sourceMap: true,
               modules: true,
-              // localIdentName: '[name]__[local]___[hash:base64:5]'
+              localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
           { loader: 'postcss-loader', options: { sourceMap: true } },

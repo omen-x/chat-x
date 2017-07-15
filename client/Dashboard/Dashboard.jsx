@@ -3,6 +3,8 @@ import React from 'react';
 import DashboardHeader from 'client/DashboardHeader/DashboardHeader'; // eslint-disable-line
 import StreamContainer from 'client/Stream/StreamContainer'; // eslint-disable-line
 import NewMessage from 'client/NewMessage/NewMessage'; // eslint-disable-line
+import styles from './Dashboard.sass';
+
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -13,9 +15,10 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.dashboard}>
         <DashboardHeader />
         <StreamContainer />
+        <NewMessage />
       </div>
     );
   }

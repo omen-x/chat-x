@@ -5,34 +5,24 @@ import Message from 'client/Message/Message'; // eslint-disable-line
 import styles from './Stream.sass';
 
 
-class Stream extends React.Component {
-  constructor(props) {
-    super(props);
+// Stream of messages
 
-    this.title = 'Title';
-  }
+const Stream = ({ messages }) => (
+  <div className={styles.stream}>
+    {
+      messages.map(msg => (
+        <Message
+          key={msg.author}
+          author={msg.author}
+          avatar={msg.avatar}
+          text={msg.text}
+          date={msg.date}
+        />
+      ))
+    }
+  </div>
+);
 
-  render() {
-    const { messages } = this.props;
-    console.log(messages);
-
-    return (
-      <div className={styles.header}>
-        {
-          messages.map(msg => (
-            <Message
-              key={msg.author}
-              author={msg.author}
-              avatar={msg.avatar}
-              text={msg.text}
-              date={msg.date}
-            />
-          ))
-        }
-      </div>
-    );
-  }
-}
 
 Stream.propTypes = {
   messages: arrayOf(shape({
