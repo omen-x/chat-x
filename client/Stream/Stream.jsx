@@ -6,13 +6,14 @@ import styles from './Stream.sass';
 
 
 // Stream of messages
+// TODO: keys
 
 const Stream = ({ messages }) => (
   <div className={styles.stream}>
     {
       messages.map(msg => (
         <Message
-          key={msg.author}
+          key={msg.text}
           author={msg.author}
           avatar={msg.avatar}
           text={msg.text}

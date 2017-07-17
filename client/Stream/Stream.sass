@@ -1,7 +1,23 @@
 @import '~cssVars'
 
 .stream
+  overflow-y: scroll
+  overflow-x: hidden
+  max-height: calc(100vh - 123px)
   flex-grow: 1
   border-bottom: 2px solid  $c-border
   background: #FFF
   padding-bottom: 40px
+
+  &::-webkit-scrollbar
+    width: 7px
+
+  &::-webkit-scrollbar-track
+    box-shadow: inset 0 0 0 1px rgba(#000,.5)
+    border-radius: 4px
+
+  &::-webkit-scrollbar-thumb
+    border-radius: 4px
+    background: $c-secondary
+
+
