@@ -11,7 +11,10 @@ class NewMessage extends React.Component {
     super(props);
 
     this.state = {
-      text: ''
+      text: '',
+      errors: {
+        text: false
+      }
     };
   }
 
@@ -21,14 +24,30 @@ class NewMessage extends React.Component {
     this.setState(() => ({ text: newText }));
   }
 
+  /**
+   * Extract the validation to a pure function
+   * @param  {string} text - input value
+   * @return {bool}      - validation result
+   */
+  validateForm = (text) => {
+    if (text === '') return false;
+    return true;
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
 
     const { newMessage } = this.props;
     const { text } = this.state;
 
-    newMessage(text);
-    this.setState(() => ({ text: '' }));
+    if (this.validateForm(text)) {
+      newMessage(text);
+      this.setState(() => ({ text: '' }));
+    } else {
+      this.setState(() => ({
+        errors: { text: true }
+      }));
+    }
   }
 
 

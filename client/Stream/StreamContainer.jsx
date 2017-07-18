@@ -6,7 +6,8 @@ import Stream from './Stream';
 
 
 const mapStateToProps = state => ({
-  messages: state.messages
+  messages: state.messages,
+  userName: `${state.user.name} ${state.user.secondName}`
 });
 
 export default connect(mapStateToProps)(Stream);

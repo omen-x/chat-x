@@ -1,25 +1,45 @@
 @import 'styles/partials'
 
-//________ SUPPORT CLASSES ________
 
-  // Max width for content (container for content)
-.content-width
-  max-width: $w-content_max
-  min-width: $w-min
-  margin: 0 auto
 
-  // paddings when viewport width <= content
-  @media only screen and (max-width : $w-content_padding)
-    padding-left: 15px
-    padding-right: 15px
 
-.clearfix
-  &:before
-    content: ""
-    display: table
+* :global
+  .content-width
+    max-width: $w-content_max
+    min-width: $w-min
+    margin: 0 auto
 
-  &:after
-    content: ""
-    display: table
-    clear: both
+    // paddings when viewport width <= content
+    @media only screen and (max-width : $w-content_padding)
+      padding-left: 15px
+      padding-right: 15px
 
+  .clearfix
+    &:before
+      content: ""
+      display: table
+
+    &:after
+      content: ""
+      display: table
+      clear: both
+
+
+
+  //_______ ANIMATION ________
+
+  .fade-enter
+    transform: translateY(10px)
+    opacity: 0
+
+  .fade-enter.fade-enter-active
+    transform: translateY(0)
+    opacity: 1
+    transition: opacity 250ms ease-in, transform .2s ease-in
+
+  .fade-exit
+    opacity: 1
+
+  .fade-exit.fade-exit-active
+    opacity: 0.01
+    transition: opacity 300ms ease-in
