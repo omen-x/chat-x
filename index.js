@@ -28,8 +28,8 @@ io.on('connection', (socket) => {
     console.log('user disconnected');
   });
 
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+  socket.on('new message', (msg) => {
+    socket.broadcast.emit('new message', msg);
   });
 });
 

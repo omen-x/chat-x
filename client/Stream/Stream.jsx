@@ -37,7 +37,7 @@ class Stream extends React.Component {
           {
             messages.map(msg => (
               <Message
-                key={msg.text}
+                key={msg.id}
                 author={msg.author}
                 avatar={msg.avatar}
                 text={msg.text}
@@ -54,10 +54,11 @@ class Stream extends React.Component {
 Stream.propTypes = {
   userName: string.isRequired,
   messages: arrayOf(shape({
-    author: string,
-    avatar: number,
-    text: string,
-    date: string
+    id: number.isRequired,
+    author: string.isRequired,
+    avatar: number.isRequired,
+    text: string.isRequired,
+    date: string.isRequired
   })).isRequired
 };
 

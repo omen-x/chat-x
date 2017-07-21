@@ -1,23 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './DashBoardHeader.sass';
 import { colors } from 'client/App/App'; //eslint-disable-line
 
 
-class DashboardHeader extends React.Component {
-  constructor(props) {
-    super(props);
+const DashboardHeader = ({ userName }) => (
+  <div className={styles.header}>
+    <p>{userName}</p>
+  </div>
+);
 
-    this.title = 'Title';
-  }
 
-  render() {
-    return (
-      <div className={styles.header}>
-        <p>Denis Volok</p>
-      </div>
-    );
-  }
-}
+DashboardHeader.propTypes = {
+  userName: PropTypes.string.isRequired
+};
+
 
 export default DashboardHeader;
