@@ -1,27 +1,18 @@
 import React from 'react';
 
-import DashboardHeaderContainer from 'client/DashboardHeader/DashboardHeaderContainer'; // eslint-disable-line
-import StreamContainer from 'client/Stream/StreamContainer'; // eslint-disable-line
-import NewMessageContainer from 'client/NewMessage/NewMessageContainer'; // eslint-disable-line
+import DashboardHeader from 'client/DashboardHeader'; // eslint-disable-line
+import Stream from 'client/Stream'; // eslint-disable-line
+import NewMessage from 'client/NewMessage'; // eslint-disable-line
 import styles from './Dashboard.sass';
 
 
-class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
+const Dashboard = () => (
+  <div className={styles.dashboard}>
+    <DashboardHeader />
+    <Stream />
+    <NewMessage />
+  </div>
+);
 
-    this.title = 'Title';
-  }
-
-  render() {
-    return (
-      <div className={styles.dashboard}>
-        <DashboardHeaderContainer />
-        <StreamContainer />
-        <NewMessageContainer />
-      </div>
-    );
-  }
-}
 
 export default Dashboard;

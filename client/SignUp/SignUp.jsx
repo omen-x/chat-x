@@ -47,7 +47,7 @@ class SignUp extends React.Component {
           <input type="radio" name="avatar" value="4" />
           <input type="radio" name="avatar" value="5" />
         </div>
-        <button className="btn-accent">GO!</button>
+        <button className="btn-accent">Connect</button>
       </form>
     );
   }

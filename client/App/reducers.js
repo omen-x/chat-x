@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 // ========>> COMPONENT REDUCERS <<========
-import StreamReducer from 'client/Stream/StreamReducer'; // eslint-disable-line
+import { messages as streamReducer } from 'client/Stream'; // eslint-disable-line
 
 
 // ========>> USER REDUCER <<========
@@ -17,7 +17,6 @@ const userInitState = {
 const userReducer = (state = userInitState, action) => {
   switch (action.type) {
     case 'SET_USER_DATA': {
-      console.log(Object.assign({}, state, action.data));
       return Object.assign({}, state, action.data);
     }
 
@@ -31,6 +30,6 @@ const userReducer = (state = userInitState, action) => {
 
 export default combineReducers({
   user: userReducer,
-  messages: StreamReducer,
+  messages: streamReducer,
 });
 

@@ -3,7 +3,7 @@ import { arrayOf, shape, string, number } from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
 import Scroll from 'react-scroll';
 
-import Message from 'client/Message/Message'; // eslint-disable-line
+import Message from 'client/Message'; // eslint-disable-line
 import styles from './Stream.sass';
 
 

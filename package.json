@@ -6,8 +6,8 @@
   "scripts": {
     "start": "",
     "build": "cross-env NODE_ENV=production webpack",
-    "dev-client": "cross-env NODE_ENV=development nodemon --watch webpack.config.js --exec  webpack-dev-server",
-    "dev-server": "nodemon index.js --ignore 'client/**/*' --exec babel-node",
+    "dev-client": "cross-env NODE_ENV=development nodemon --config nodemon.client.json --watch webpack.config.js --exec  webpack-dev-server",
+    "dev-server": "nodemon index.js --config nodemon.server.json --exec babel-node",
     "test": "jest --watch"
   },
   "repository": {
@@ -50,7 +50,8 @@
       "import/first": 0,
       "allowTernary": 0,
       "array-callback-return": 0,
-      "react/jsx-filename-extension": 0
+      "react/jsx-filename-extension": 0,
+      "import/prefer-default-export": "warn"
     }
   },
   "browserslist": [

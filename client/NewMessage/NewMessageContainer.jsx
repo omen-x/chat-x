@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 
 import NewMessage from './NewMessage';
-import { newMessage } from 'client/Stream/StreamActions'; // eslint-disable-line
+import { actions as streamActions } from 'client/Stream'; // eslint-disable-line
+
+
+const { newMessage } = streamActions;
 
 
 const mapDispatchToProps = dispatch => ({
