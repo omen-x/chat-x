@@ -61,7 +61,3 @@ SignUp.propTypes = {
 
 
 export default SignUp;
-
-
-// save token
-

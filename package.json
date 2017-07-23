@@ -4,7 +4,7 @@
   "description": "instant messaging app",
   "main": "index.js",
   "scripts": {
-    "start": "",
+    "start": "node index.js",
     "build": "cross-env NODE_ENV=production webpack",
     "dev-client": "cross-env NODE_ENV=development nodemon --config nodemon.client.json --watch webpack.config.js --exec  webpack-dev-server",
     "dev-server": "nodemon index.js --config nodemon.server.json --exec babel-node",
@@ -54,6 +54,7 @@
       "import/prefer-default-export": "warn"
     }
   },
+  "eslintIgnore": ["node_modules"],
   "browserslist": [
     "last 3 versions",
     "not ie < 10"

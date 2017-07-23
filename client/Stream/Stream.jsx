@@ -1,5 +1,5 @@
 import React from 'react';
-import { arrayOf, shape, string, number } from 'prop-types';
+import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
 import Scroll from 'react-scroll';
 
@@ -8,7 +8,8 @@ import styles from './Stream.sass';
 
 
 // Stream of messages
-// TODO: keys, replays user check with ID
+// TODO:
+// -replays user check (scrolling) with ID
 
 class Stream extends React.Component {
 
@@ -52,13 +53,13 @@ class Stream extends React.Component {
 }
 
 Stream.propTypes = {
-  userName: string.isRequired,
-  messages: arrayOf(shape({
-    id: number.isRequired,
-    author: string.isRequired,
-    avatar: number.isRequired,
-    text: string.isRequired,
-    date: string.isRequired
+  userName: PropTypes.string.isRequired,
+  messages: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    author: PropTypes.string.isRequired,
+    avatar: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired
   })).isRequired
 };
 

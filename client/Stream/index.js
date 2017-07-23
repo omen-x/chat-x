@@ -1,9 +1,3 @@
-import StreamContainer from './StreamContainer';
-import * as actions from './StreamActions';
-import messages from './StreamReducer';
-
-
-const Stream = StreamContainer;
-
-export { actions, messages };
-export default Stream;
+export { default as actions } from './StreamActions';
+export { default as messages } from './StreamReducer';
+export { default } from './StreamContainer';

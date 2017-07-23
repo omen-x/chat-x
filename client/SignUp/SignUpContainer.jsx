@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import SignUp from './SignUp';
-// import { modules as appModules, actions as appActions } from 'client/App'; // eslint-disable-line
+import { actions as appActions } from 'client/App'; // eslint-disable-line
+import { Auth } from 'modules';
 
+const { setUserData } = appActions;
 
-// const { Auth } = appModules;
-// const { setUserData } = appActions;
 
 // extracts logic from SignUp
 class SignUpContainer extends React.Component {

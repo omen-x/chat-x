@@ -1,3 +1,1 @@
-import SignUpContainer from './SignUpContainer';
-
-export { SignUpContainer as SignUp };
+export { default } from './SignUpContainer';

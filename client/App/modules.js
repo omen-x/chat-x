@@ -1,21 +1,10 @@
-import { store } from 'client/index'; // eslint-disable-line
-import { actions as streamActions } from 'client/Stream'; // eslint-disable-line
-
-
 // ========>> SOCKET.IO <<========
 
-export const socket = io();
-
-const { addMessage } = streamActions;
-
-socket.on('new message', (msg) => {
-  store.dispatch(addMessage(msg));
-});
-
+const socket = io();
 
 // ========>> AUTH <<========
 
-export class Auth {
+class Auth {
   static authenticateUser(token) {
     localStorage.setItem('user', token);
   }
@@ -32,3 +21,9 @@ export class Auth {
     return localStorage.getItem('user');
   }
 }
+
+
+export default {
+  socket,
+  Auth
+};

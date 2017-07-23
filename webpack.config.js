@@ -29,6 +29,7 @@ const config = {
     extensions: ['.js', '.jsx', '.sass'],
     alias: {
       client: path.resolve(__dirname, 'client'),
+      modules: path.resolve(__dirname, 'client/App/modules'),
       cssVars: path.resolve(__dirname, 'client/App/styles/partials/_vars.sass'),
       decor: path.resolve(__dirname, 'client/App/img/decor'),
       icons: path.resolve(__dirname, 'client/App/img/icons')

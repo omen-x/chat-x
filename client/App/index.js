@@ -1,8 +1,16 @@
-import App from './App';
-import * as modules from './modules';
-import * as actions from './actions';
-import reducers from './reducers';
+// import App from './App';
+// import reducer from './reducer';
+// export { modules, actions, reducer };
 
 
-export { modules, actions, reducers };
-export default App;
+// import * as modules from './modules';
+// import * as actions from './actions';
+// export { modules, actions };
+
+// export * from './modules';
+// export * from './actions';
+
+
+export { default as actions } from './actions';
+export { default as reducer } from './reducer';
+export { default } from './App';

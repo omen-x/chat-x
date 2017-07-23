@@ -4,9 +4,10 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import App, { reducers } from './App';
+import App, { reducer } from 'client/App'; // eslint-disable-line
 
-export const store = createStore(reducers, applyMiddleware(thunk)); // eslint-disable-line
+
+export const store = createStore(reducer, applyMiddleware(thunk)); // eslint-disable-line
 
 
 ReactDOM.render(

@@ -1,4 +1,5 @@
-import { socket } from 'client/App/App'; // eslint-disable-line
+// import { modules } from 'client/App'; // eslint-disable-line
+import { socket } from 'modules'; // eslint-disable-line
 
 
 export const addMessage = (message = {}) => ({
@@ -22,11 +23,17 @@ export const newMessage = (text = '') => {
     const id = Math.floor(Math.random() * 1000000);
     const message = { id, author, avatar, text, date };
 
+
     // send to server
     socket.emit('new message', message);
 
     // save in store
-    // not necessary? (possible problems: delay)
     dispatch(addMessage(message));
   };
+};
+
+
+export default {
+  addMessage,
+  newMessage
 };
