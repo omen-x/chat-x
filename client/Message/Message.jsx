@@ -19,7 +19,7 @@ const Message = ({ author, avatar, text, date, in: inProp }) => (
   <CSSTransition
     in={inProp}
     timeout={500}
-    classNames="fade"
+    classNames="fadeToTop"
   >
     <div className={styles.message}>
       <div className={styles.avatar}>

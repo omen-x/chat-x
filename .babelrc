@@ -8,6 +8,12 @@
   "plugins": [
     "add-module-exports",
     "transform-es2015-modules-commonjs",
-    ["lodash", { "id": ["lodash", "semantic-ui-react"] }]
+    ["module-resolver", {
+      "root": ["./"],
+      "alias": {
+        "client": "./client",
+        "modules": "./client/App/modules",
+      }
+    }]
   ]
 }

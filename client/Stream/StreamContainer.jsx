@@ -10,10 +10,10 @@ import { addMessage } from './StreamActions';
 
 class StreamContainer extends React.Component {
   componentDidMount() {
-    const { addMessage } = this.props;
+    const { addMessage: addMessageProp } = this.props;
 
     socket.on('new message', (msg) => {
-      addMessage(msg);
+      addMessageProp(msg);
     });
   }
 
@@ -49,7 +49,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addMessage: (msg) => {
-    dispatch(addMessage(msg))
+    dispatch(addMessage(msg));
   }
 });
 

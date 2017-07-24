@@ -42,16 +42,15 @@
       background-color: $c-accent_d
 
 
-  //_______ ANIMATION ________
+  //_______ ANIMATION FOR REACT TRANSITION GROUP ________
+
 
   .fade-enter
-    transform: translateY(10px)
     opacity: 0
 
   .fade-enter.fade-enter-active
-    transform: translateY(0)
     opacity: 1
-    transition: opacity 250ms ease-in, transform .2s ease-in
+    transition: opacity 350ms ease-in
 
   .fade-exit
     opacity: 1
@@ -59,3 +58,39 @@
   .fade-exit.fade-exit-active
     opacity: 0.01
     transition: opacity 300ms ease-in
+
+  // fade to top
+  .fadeToTop-enter
+    transform: translateY(10px)
+    opacity: 0
+
+  .fadeToTop-enter.fadeToTop-enter-active
+    transform: translateY(0)
+    opacity: 1
+    transition: opacity 250ms ease-in, transform .2s ease-in
+
+  .fadeToTop-exit
+    opacity: 1
+
+  .fadeToTop-exit.fadeToTop-exit-active
+    opacity: 0.01
+    transition: opacity 300ms ease-in
+
+
+  // fade to bottom
+
+  .fadeToBottom-enter
+    transform: translateY(-50px)
+    opacity: 0
+
+  .fadeToBottom-enter.fadeToBottom-enter-active
+    transform: translateY(0)
+    opacity: 1
+    transition: opacity 350ms ease-in, transform .3s ease-in
+
+  .fadeToBottom-exit
+    opacity: 1
+
+  .fadeToBottom-exit.fadeToBottom-exit-active
+    opacity: 0.01
+    transition: opacity 300ms ease-in, transform .3s ease-in

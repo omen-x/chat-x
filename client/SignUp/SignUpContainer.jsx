@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import SignUp from './SignUp';
-import { actions as appActions } from 'client/App'; // eslint-disable-line
-import { Auth } from 'modules';
+import { actions as userActions } from 'client/User'; // eslint-disable-line
+import { Auth } from 'modules'; // eslint-disable-line
 
-const { setUserData } = appActions;
+const { setUserData } = userActions;
 
 
 // extracts logic from SignUp
@@ -17,13 +17,14 @@ class SignUpContainer extends React.Component {
   }
 
   render() {
-    const { setUserData: setUserDataProp, history } = this.props;
+    const { setUserData: setUserDataProp, history, in: inProp } = this.props;
 
     return (
       <SignUp
         setUserData={setUserDataProp}
         authenticateUser={this.authenticateUser}
         history={history}
+        in={inProp}
       />
     );
   }
@@ -31,7 +32,12 @@ class SignUpContainer extends React.Component {
 
 SignUpContainer.propTypes = {
   setUserData: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired // eslint-disable-line
+  history: PropTypes.object.isRequired, // eslint-disable-line
+  in: PropTypes.bool.isRequired
+};
+
+SignUpContainer.defaultProps = {
+  in: false
 };
 
 

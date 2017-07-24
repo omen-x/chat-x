@@ -1,29 +1,9 @@
 import { combineReducers } from 'redux';
 
-// ========>> COMPONENT REDUCERS <<========
+
+// ========>> REDUCERS FROM MODULES <<========
 import { messages as streamReducer } from 'client/Stream'; // eslint-disable-line
-
-
-// ========>> USER REDUCER <<========
-
-const userInitState = {
-  id: 1,
-  name: 'Denis',
-  secondName: 'Volok',
-  avatar: 1,
-  isUserAuthenticated: false
-};
-
-const userReducer = (state = userInitState, action) => {
-  switch (action.type) {
-    case 'SET_USER_DATA': {
-      return Object.assign({}, state, action.data);
-    }
-
-    default:
-      return state;
-  }
-};
+import { user as userReducer } from 'client/User'; // eslint-disable-line
 
 
 // ========>> COMBINE REDUCERS <<========

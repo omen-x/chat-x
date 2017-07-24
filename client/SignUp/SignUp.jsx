@@ -1,7 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { CSSTransition } from 'react-transition-group';
 
 import styles from './SignUp.sass';
+import { capitalizeFirstLetter } from 'helpers'; // eslint-disable-line
+
+// dude pls
+import avatar1 from 'decor/avatars/ava-1.png'// eslint-disable-line
+import avatar2 from 'decor/avatars/ava-2.png'// eslint-disable-line
+import avatar3 from 'decor/avatars/ava-3.png'// eslint-disable-line
+import avatar4 from 'decor/avatars/ava-4.png'// eslint-disable-line
+import avatar5 from 'decor/avatars/ava-5.png'// eslint-disable-line
+
+const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
 
 
 class SignUp extends React.Component {
@@ -15,8 +26,8 @@ class SignUp extends React.Component {
 
     const userData = {
       id: tempUserId,
-      name: form.name.value,
-      secondName: form.secondName.value,
+      name: capitalizeFirstLetter(form.name.value),
+      secondName: capitalizeFirstLetter(form.secondName.value),
       avatar: parseInt(form.avatar.value, 10)
     };
 
@@ -32,23 +43,35 @@ class SignUp extends React.Component {
 
 
   render() {
+    const { in: inProp } = this.props;
+
     return (
-      <form onSubmit={this.handleSubmit} className={styles.signUp}>
-        <h2>Sign Up</h2>
-        <div className={styles.fieldsText}>
-          <input type="text" name="name" placeholder="Your name" required />
-          <input type="text" name="secondName" placeholder="Your second name" required />
-        </div>
-        <h3>Choose avatar</h3>
-        <div className={styles.fieldsRadio}>
-          <input type="radio" name="avatar" value="1" />
-          <input type="radio" name="avatar" value="2" />
-          <input type="radio" name="avatar" value="3" />
-          <input type="radio" name="avatar" value="4" />
-          <input type="radio" name="avatar" value="5" />
-        </div>
-        <button className="btn-accent">Connect</button>
-      </form>
+      <CSSTransition
+        in={inProp}
+        timeout={2500}
+        classNames="fadeToBottom"
+      >
+        <form onSubmit={this.handleSubmit} className={styles.signUp}>
+          <h2>Sign Up</h2>
+          <div className={styles.fieldsText}>
+            <input type="text" name="name" placeholder="Your name" required />
+            <input type="text" name="secondName" placeholder="Your second name" required />
+          </div>
+          <h3>Select an avatar</h3>
+          <ul className={styles.fieldsRadio}>
+            {avatars.map((ava, i) => (
+              <li key={ava}>
+                <input type="radio" id={`ava-${i + 1}`} name="avatar" value={i + 1} />
+                <label htmlFor={`ava-${i + 1}`}>
+                  <img src={ava} alt="avatar" />
+                </label>
+              </li>
+              ))
+            }
+          </ul>
+          <button className="btn-accent">Connect</button>
+        </form>
+      </CSSTransition>
     );
   }
 }
@@ -56,7 +79,8 @@ class SignUp extends React.Component {
 SignUp.propTypes = {
   setUserData: PropTypes.func.isRequired,
   authenticateUser: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired // eslint-disable-line
+  history: PropTypes.object.isRequired, // eslint-disable-line
+  in: PropTypes.bool.isRequired
 };
 
 
