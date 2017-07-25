@@ -3,6 +3,7 @@ const userInitState = {
   id: 1,
   name: 'Denis',
   secondName: 'Volok',
+  fullName: 'Denis Volok',
   avatar: 1,
   isUserAuthenticated: false
 };

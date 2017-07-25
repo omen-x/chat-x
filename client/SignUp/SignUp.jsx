@@ -16,26 +16,31 @@ const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
 
 
 class SignUp extends React.Component {
+  // serializes form data and pass to action
   // need some validation
   handleSubmit = (event) => {
     event.preventDefault();
 
     const form = event.target;
     const { setUserData, authenticateUser, history } = this.props;
+    // replace with an id from db
     const tempUserId = Math.floor(Math.random() * 1000000);
+    const name = capitalizeFirstLetter(form.name.value);
+    const secondName = capitalizeFirstLetter(form.secondName.value);
+    const fullName = `${name} ${secondName}`;
 
     const userData = {
       id: tempUserId,
-      name: capitalizeFirstLetter(form.name.value),
-      secondName: capitalizeFirstLetter(form.secondName.value),
+      name,
+      secondName,
+      fullName,
       avatar: parseInt(form.avatar.value, 10)
     };
 
-    // temp token for user authentication
-    const name = `${userData.name}&${userData.secondName}`;
-
+    // save in the store
     setUserData(userData);
-    authenticateUser(name);
+    // temp token for user authentication
+    authenticateUser(fullName);
     history.push('/');
 
     form.reset();

@@ -1,6 +1,7 @@
 import React from 'react';
 import { string, number, bool } from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
+import cx from 'classnames';
 
 // omg!1!!!1!!
 import avatar1 from 'decor/avatars/ava-1.png'// eslint-disable-line
@@ -15,30 +16,37 @@ const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
 
 // Single message
 
-const Message = ({ author, avatar, text, date, in: inProp }) => (
-  <CSSTransition
-    in={inProp}
-    timeout={500}
-    classNames="fadeToTop"
-  >
-    <div className={styles.message}>
-      <div className={styles.avatar}>
-        <img src={avatars[avatar - 1]} alt="User avatar" />
+const Message = ({ author, avatar, text, date, in: inProp, userFullName }) => {
+  const isCurrentUser = userFullName === author;
+  const authorClassName = cx(styles.author, { [styles.author_current]: isCurrentUser });
+
+  console.log(author);
+  return (
+    <CSSTransition
+      in={inProp}
+      timeout={500}
+      classNames="fadeToTop"
+    >
+      <div className={styles.message}>
+        <div className={styles.avatar}>
+          <img src={avatars[avatar - 1]} alt="User avatar" />
+        </div>
+        <div className={styles.content}>
+          <p className={authorClassName}>{author}</p>
+          <span className={styles.date}>{date}</span>
+          <p className={styles.text}>{text}</p>
+        </div>
       </div>
-      <div className={styles.content}>
-        <p className={styles.author}>{author}</p>
-        <span className={styles.date}>{date}</span>
-        <p className={styles.text}>{text}</p>
-      </div>
-    </div>
-  </CSSTransition>
-);
+    </CSSTransition>
+  );
+};
 
 Message.propTypes = {
   author: string.isRequired,
   avatar: number.isRequired,
   text: string.isRequired,
   date: string.isRequired,
+  userFullName: string.isRequired,
   in: bool.isRequired
 };
 
