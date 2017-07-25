@@ -13,10 +13,10 @@ import styles from './Stream.sass';
 
 class Stream extends React.Component {
 
-  componentDidUpdate(prevProps) {
-    const { userName } = this.props;
+  componentDidUpdate() {
+    const { userName, messages } = this.props;
     // author of the last added message
-    const newMessageAuthor = prevProps.messages.slice(-1)[0].author;
+    const newMessageAuthor = messages.slice(-1)[0].author;
 
     // if the current user adds a message, scroll down
     if (userName === newMessageAuthor) this.scrollToBottom();
