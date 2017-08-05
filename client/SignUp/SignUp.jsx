@@ -16,17 +16,31 @@ const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
 
 
 class SignUp extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: '',
+      secondName: '',
+      avatar: 0
+    };
+  }
+
   // serializes form data and pass to action
   // need some validation
   handleSubmit = (event) => {
     event.preventDefault();
 
     const form = event.target;
-    const { setUserData, authenticateUser, history } = this.props;
+    let { name, secondName, avatar } = this.state;
+    const { setUserData, authenticateUser } = this.props;
+
     // replace with an id from db
     const tempUserId = Math.floor(Math.random() * 1000000);
-    const name = capitalizeFirstLetter(form.name.value);
-    const secondName = capitalizeFirstLetter(form.secondName.value);
+
+    name = capitalizeFirstLetter(name);
+    secondName = capitalizeFirstLetter(secondName);
+    avatar = parseInt(avatar, 10);
     const fullName = `${name} ${secondName}`;
 
     const userData = {
@@ -34,21 +48,28 @@ class SignUp extends React.Component {
       name,
       secondName,
       fullName,
-      avatar: parseInt(form.avatar.value, 10)
+      avatar
     };
 
     // save in the store
     setUserData(userData);
     // temp token for user authentication
     authenticateUser(fullName);
-    history.push('/');
 
     form.reset();
   }
 
+  handleFormChange = (event) => {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+
+    this.setState({ [name]: value });
+  }
 
   render() {
     const { in: inProp } = this.props;
+    const { name, secondName, avatar } = this.state;
 
     return (
       <CSSTransition
@@ -59,14 +80,35 @@ class SignUp extends React.Component {
         <form onSubmit={this.handleSubmit} className={styles.signUp}>
           <h2>Sign Up</h2>
           <div className={styles.fieldsText}>
-            <input type="text" name="name" placeholder="Your name" required />
-            <input type="text" name="secondName" placeholder="Your second name" required />
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={this.handleFormChange}
+              placeholder="Your name"
+              required
+            />
+            <input
+              type="text"
+              name="secondName"
+              value={secondName}
+              onChange={this.handleFormChange}
+              placeholder="Your second name"
+              required
+            />
           </div>
           <h3>Select an avatar</h3>
           <ul className={styles.fieldsRadio}>
             {avatars.map((ava, i) => (
-              <li key={ava}>
-                <input type="radio" id={`ava-${i + 1}`} name="avatar" value={i + 1} />
+              <li key={i}>
+                <input
+                  type="radio"
+                  id={`ava-${i + 1}`}
+                  name="avatar"
+                  checked={i + 1 == avatar}
+                  onChange={this.handleFormChange}
+                  value={i + 1}
+                />
                 <label htmlFor={`ava-${i + 1}`}>
                   <img src={ava} alt="avatar" />
                 </label>
@@ -84,7 +126,6 @@ class SignUp extends React.Component {
 SignUp.propTypes = {
   setUserData: PropTypes.func.isRequired,
   authenticateUser: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired, // eslint-disable-line
   in: PropTypes.bool.isRequired
 };
 

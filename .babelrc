@@ -13,6 +13,7 @@
       "alias": {
         "client": "./client",
         "modules": "./client/App/modules",
+        "helpers": "./client/App/helpers"
       }
     }]
   ]

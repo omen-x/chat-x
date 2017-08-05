@@ -20,7 +20,6 @@ const Message = ({ author, avatar, text, date, in: inProp, userFullName }) => {
   const isCurrentUser = userFullName === author;
   const authorClassName = cx(styles.author, { [styles.author_current]: isCurrentUser });
 
-  console.log(author);
   return (
     <CSSTransition
       in={inProp}

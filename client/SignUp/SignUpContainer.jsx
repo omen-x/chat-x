@@ -13,7 +13,10 @@ const { setUserData } = userActions;
 // extracts logic from SignUp
 class SignUpContainer extends React.Component {
   authenticateUser = (name) => {
+    const { history } = this.props;
+
     Auth.authenticateUser(name);
+    history.push('/');
   }
 
   render() {
@@ -23,7 +26,6 @@ class SignUpContainer extends React.Component {
       <SignUp
         setUserData={setUserDataProp}
         authenticateUser={this.authenticateUser}
-        history={history}
         in={inProp}
       />
     );
