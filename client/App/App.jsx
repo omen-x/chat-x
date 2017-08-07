@@ -3,9 +3,19 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './app.sass';
 import routes from './routes';
+import { socket } from './modules';
 
 
-const App = () => (<BrowserRouter>{routes}</BrowserRouter>);
+class App extends React.Component {
+  componentDidMount() {
 
+  }
+
+  render() {
+    return (
+      <BrowserRouter>{routes}</BrowserRouter>
+    );
+  }
+}
 
 export default App;

@@ -5,6 +5,7 @@ const userInitState = {
   secondName: 'Volok',
   fullName: 'Denis Volok',
   avatar: 1,
+  isUserConnected: false,
   isUserAuthenticated: false
 };
 
@@ -17,6 +18,12 @@ const user = (state = userInitState, action) => {
       return {
         ...state,
         isUserAuthenticated: false
+      };
+    }
+    case 'CONNECT_USER': {
+      return {
+        ...state,
+        isUserConnected: true
       };
     }
 

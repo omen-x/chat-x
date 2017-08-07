@@ -1,4 +1,5 @@
-import { socket } from 'modules'; // eslint-disable-line
+// import { socket } from 'modules'; // eslint-disable-line
+import { Socket } from 'modules'; // eslint-disable-line
 
 
 export const addMessage = (message = {}) => ({

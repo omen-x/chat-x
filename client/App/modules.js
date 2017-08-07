@@ -1,5 +1,29 @@
 // ========>> SOCKET.IO <<========
-const socket = io();
+// const socket = io();
+
+// Wrapper over socket.io
+
+class Socket {
+  constructor() {
+    this.socket = null;
+  }
+
+  connect() {
+    if (this.socket === null) {
+      this.socket = io();
+    } else throw new Error('Socket already defined');
+  }
+
+  getSocket() {
+    return this.socket;
+  }
+  on(event, callback) {
+    this.socket.on(event, callback);
+  }
+}
+
+const socket = new Socket();
+
 
 // ========>> AUTH <<========
 

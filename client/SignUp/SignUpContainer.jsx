@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 
 import SignUp from './SignUp';
 import { actions as userActions } from 'client/User'; // eslint-disable-line
-import { Auth } from 'modules'; // eslint-disable-line
+import { Auth, socket } from 'modules'; // eslint-disable-line
 
 const { setUserData } = userActions;
 
@@ -17,6 +17,7 @@ class SignUpContainer extends React.Component {
 
     Auth.authenticateUser(name);
     history.push('/');
+    socket.connect();
   }
 
   render() {

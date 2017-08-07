@@ -8,24 +8,40 @@ class Users extends React.Component {
     super(props);
 
     this.title = 'Title';
+    this.users = [];
   }
 
   render() {
     return (
       <div className={styles.users}>
         <UsersHeader />
-        <UsersList />
+        <UsersList users={this.users} />
       </div>
     );
   }
 }
 
+
 // ========>> USERS HEADER <<========
 
-const usersHeader = () => (
+const UsersHeader = () => (
   <div className={styles.usersHeader}>
     <p>Users</p>
   </div>
+);
+
+
+// ========>> USERS LIST <<========
+
+
+const UsersList = ({ users }) => (
+  <ul>
+    {users.map((user, i) => (
+      <li key={user.id}>
+        {user.fullName}
+      </li>
+    ))}
+  </ul>
 );
 
 

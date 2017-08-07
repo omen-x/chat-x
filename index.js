@@ -21,8 +21,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+// ========>> ROUTES <<========
+
+const authRoutes = require('./server/routes/auth');
+
+app.use('/auth', authRoutes);
+
+
+// ========>> SOCKET.IO <<========
+
+const clients = [];
+
 io.on('connection', (socket) => {
   console.log('a user connected');
+
+  // clients.push(socket);
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
@@ -31,7 +44,14 @@ io.on('connection', (socket) => {
   socket.on('new message', (msg) => {
     socket.broadcast.emit('new message', msg);
   });
+
+  // socket.on('online users', () => {
+  //   socket.
+  // });
 });
+
+
+// ========>> LISTEN <<========
 
 const PORT = process.env.PORT || 8080;
 

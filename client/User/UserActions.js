@@ -1,7 +1,15 @@
-import { Auth } from 'modules'; // eslint-disable-line
+import { Auth, socket } from 'modules'; // eslint-disable-line
 
 
 // ========>> USER <<========
+
+const connectUser = () => {
+  socket.connect();
+
+  return {
+    type: 'CONNECT_USER'
+  };
+};
 
 const setUserData = data => ({
   type: 'SET_USER_DATA',
@@ -20,6 +28,7 @@ const deauthenticateUser = () => {
 // ========>> EXPORTS <<========
 
 export default {
+  connectUser,
   setUserData,
   deauthenticateUser
 };
