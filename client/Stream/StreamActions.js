@@ -1,4 +1,3 @@
-// import { modules } from 'client/App'; // eslint-disable-line
 import { socket } from 'modules'; // eslint-disable-line
 
 
@@ -18,8 +17,8 @@ export const newMessage = (text = '') => {
 
 
   return (dispatch, getState) => {
-    const { avatar, name, secondName, id: authorId } = getState().user;
-    const author = `${name} ${secondName}`;
+    const { avatar, fullName, id: authorId } = getState().user;
+    const author = fullName;
     const id = Math.floor(Math.random() * 1000000);
     const message = { id, author, authorId, avatar, text, date };
 

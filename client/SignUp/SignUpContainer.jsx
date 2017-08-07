@@ -20,7 +20,7 @@ class SignUpContainer extends React.Component {
   }
 
   render() {
-    const { setUserData: setUserDataProp, history, in: inProp } = this.props;
+    const { setUserData: setUserDataProp, in: inProp } = this.props;
 
     return (
       <SignUp

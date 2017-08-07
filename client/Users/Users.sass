@@ -1,23 +1,28 @@
 @import '~cssVars'
 
+.users
+  width: 23%
+  flex-shrink: 0
 
-.header
+.usersHeader
   display: flex
   justify-content: space-between
   align-items: center
   position: relative
   z-index: 1
   background: $c-accent
+  border-right: 2px solid #DBDBDB
   padding: 20px 25px
   // box-shadow: 0 2px 5px 1px rgba(#000, .3)
 
   p
     font-size: 30px
+    // padding-left: 25px
+    background-repeat: no-repeat
+    background-size: 15px auto
     color: #FFF
 
-  button
-    background-color: transparent
-    font-size: rem(18)
-    font-family: $f-title
-    font-weight: 500
-    color: #FFF
+
+.usersHeader :global
+  p
+    // background-image: url('./img/users.svg')

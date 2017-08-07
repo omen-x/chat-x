@@ -1,5 +1,8 @@
 import React from 'react';
 
+import styles from './Users.sass';
+
+
 class Users extends React.Component {
   constructor(props) {
     super(props);
@@ -9,9 +12,21 @@ class Users extends React.Component {
 
   render() {
     return (
-      <div>Users</div>
+      <div className={styles.users}>
+        <UsersHeader />
+        <UsersList />
+      </div>
     );
   }
 }
+
+// ========>> USERS HEADER <<========
+
+const usersHeader = () => (
+  <div className={styles.usersHeader}>
+    <p>Users</p>
+  </div>
+);
+
 
 export default Users;

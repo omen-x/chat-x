@@ -14,7 +14,7 @@ const Chat = ({ in: inProp }) => (
     classNames="fade"
   >
     <div className={styles.chat}>
-      {/*<Users />*/}
+      <Users />
       <Dashboard />
     </div>
   </CSSTransition>
