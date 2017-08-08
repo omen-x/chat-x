@@ -5,10 +5,10 @@ const http = require('http');
 const socketIo = require('socket.io');
 
 const app = express();
+global.app = app;
+
 const server = http.Server(app);
 const io = socketIo(server);
-
-global.app = app;
 
 
 // ========>> ASSETS <<========
@@ -22,8 +22,7 @@ app.get('/', (req, res) => {
 
 // ========>> CONNECT DB <<========
 
-const mongoURI = 'mongodb://omen-x:1CGJHNCVTY@localhost:27017/chat-x';
-require('./server/models').connect(mongoURI);
+require('./server/models').connect(process.env.MONGODB_URI);
 
 
 // ========>> BODY PARSER <<========
