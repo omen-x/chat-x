@@ -5,16 +5,20 @@ const http = require('http');
 const socketIo = require('socket.io');
 
 const app = express();
-global.app = app;
-
 const server = http.Server(app);
 const io = socketIo(server);
+
+
+// ========>> GLOBAL VARS <<========
+
+global.app = app;
+app.set('jwt-secret', process.env.JWT_SECRET);
+app.set('db-uri', process.env.MONGODB_URI);
 
 
 // ========>> ASSETS <<========
 
 app.use(express.static(path.join(__dirname, 'dist')));
-// for react-router
 app.get('/', (req, res) => {
    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
@@ -22,12 +26,11 @@ app.get('/', (req, res) => {
 
 // ========>> CONNECT DB <<========
 
-require('./server/models').connect(process.env.MONGODB_URI);
+require('./server/models').connect(app.get('db-uri'));
 
 
 // ========>> BODY PARSER <<========
 
-// tell the app to parse HTTP body messages
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
