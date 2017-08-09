@@ -44,7 +44,7 @@ StreamContainer.propTypes = {
 
 const mapStateToProps = state => ({
   messages: state.messages,
-  userName: state.user.fullName
+  userName: state.user.name
 });
 
 const mapDispatchToProps = dispatch => ({

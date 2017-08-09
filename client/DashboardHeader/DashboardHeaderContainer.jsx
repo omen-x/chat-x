@@ -37,7 +37,7 @@ DashboardHeaderContainer.propTypes = {
 
 
 const mapStateToProps = state => ({
-  userName: `${state.user.name} ${state.user.secondName}`
+  userName: state.user.name
 });
 
 const mapDispatchToProps = dispatch => ({

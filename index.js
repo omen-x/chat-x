@@ -9,7 +9,7 @@ const server = http.Server(app);
 const io = socketIo(server);
 
 
-// ========>> GLOBAL VARS <<========
+// ========>> GLOBALS <<========
 
 global.app = app;
 app.set('jwt-secret', process.env.JWT_SECRET);

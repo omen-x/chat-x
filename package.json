@@ -25,7 +25,8 @@
       "jest": true
     },
     "globals": {
-      "io": true
+      "io": true,
+      "app": true
     },
     "parser": "babel-eslint",
     "plugins": [
@@ -51,6 +52,7 @@
       "allowTernary": 0,
       "array-callback-return": 0,
       "react/jsx-filename-extension": 0,
+      "react/no-array-index-key": 1,
       "import/prefer-default-export": "warn"
     }
   },
@@ -129,6 +131,7 @@
     "body-parser": "^1.17.2",
     "classnames": "^2.2.5",
     "express": "^4.15.3",
+    "history": "^4.6.3",
     "jsonwebtoken": "^7.4.2",
     "lodash": "^4.17.4",
     "mongoose": "^4.11.6",
@@ -139,6 +142,7 @@
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
+    "react-router-redux": "^5.0.0-alpha.6",
     "react-scroll": "^1.5.4",
     "react-transition-group": "^2.1.0",
     "redux": "^3.7.1",

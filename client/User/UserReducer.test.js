@@ -12,28 +12,25 @@ describe('User reducer', () => {
     expect(reducer(state, action)).toEqual(expectedState);
   });
 
-  it('sets user data', () => {
+  it('updates user data', () => {
     const state = {
       id: null,
       name: '',
-      secondName: '',
-      fullName: '',
+      email: '',
       avatar: null
     };
     const expectedState = {
       id: 5,
       name: 'Denis',
-      secondName: 'Volok',
-      fullName: 'Denis Volok',
+      email: 'denis.omen.x@gmail.com',
       avatar: 1
     };
     const action = {
-      type: 'SET_USER_DATA',
+      type: 'UPDATE_USER_DATA',
       data: {
         id: 5,
         name: 'Denis',
-        secondName: 'Volok',
-        fullName: 'Denis Volok',
+        email: 'denis.omen.x@gmail.com',
         avatar: 1
       }
     };

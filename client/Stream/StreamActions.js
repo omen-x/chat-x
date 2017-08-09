@@ -1,8 +1,8 @@
 // import { socket } from 'modules'; // eslint-disable-line
-import { Socket } from 'modules'; // eslint-disable-line
+import { socket } from 'modules'; // eslint-disable-line
 
 
-export const addMessage = (message = {}) => ({
+const addMessage = (message = {}) => ({
   type: 'ADD_MESSAGE',
   message
 });
@@ -10,7 +10,7 @@ export const addMessage = (message = {}) => ({
 // composes a new message from current user
 // we'll use redux-thunk to access user info(avatar, name)
 // and call another action with a composed message
-export const newMessage = (text = '') => {
+const newMessage = (text = '') => {
   const date = new Date().toLocaleTimeString('en-GB', {
     hour: 'numeric',
     minute: 'numeric'
@@ -18,8 +18,8 @@ export const newMessage = (text = '') => {
 
 
   return (dispatch, getState) => {
-    const { avatar, fullName, id: authorId } = getState().user;
-    const author = fullName;
+    const { avatar, name, id: authorId } = getState().user;
+    const author = name;
     const id = Math.floor(Math.random() * 1000000);
     const message = { id, author, authorId, avatar, text, date };
 

@@ -7,15 +7,37 @@ const router = express.Router();
 
 
 router.post('/signup', (req, res) => {
-  const { name, password, email } = req.body;
+  const { name, password, email, avatar } = req.body;
 
-  const newUser = new User({ name, password, email });
+  const newUser = new User({ name, password, email, avatar });
 
   newUser.save((err, user) => {
-    if (err) throw err;
+    if (err) {
+      if (err.name === 'MongoError' && err.code === 11000) {
+        // the 11000 Mongo code is for a duplication email error
+        // the 409 HTTP status code is for conflict error
+        res.status(409).json({
+          error: 'This email is already taken.'
+        });
+      }
+
+      res.status(400).json({
+        error: 'Could not process the form.'
+      });
+    }
+
+    const token = jwt.sign(user._id, app.get('jwt-secret'), { expiresIn: '4 days' });
+    const userData = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      avatar: user.avatar
+    };
 
     res.json({
-      message: 'Successful registration'
+      message: 'Successful registration',
+      user: userData,
+      token
     });
   });
 });
@@ -37,9 +59,9 @@ router.post('/login', (req, res) => {
       const token = jwt.sign(user._id, app.get('jwt-secret'), { expiresIn: '4 days' });
 
       res.json({
-        message: 'Successful logging',
+        message: 'Success logging',
         token
-      })
+      });
     });
   });
 });

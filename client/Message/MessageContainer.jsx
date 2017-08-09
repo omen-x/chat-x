@@ -4,7 +4,7 @@ import Message from './Message';
 
 
 const mapStateToProps = state => ({
-  userFullName: state.user.fullName
+  userName: state.user.name
 });
 
 

@@ -14,6 +14,7 @@ import avatar5 from 'decor/avatars/ava-5.png'// eslint-disable-line
 
 const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
 
+import { store } from 'client/index';// eslint-disable-line
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -21,8 +22,10 @@ class SignUp extends React.Component {
 
     this.state = {
       name: '',
-      secondName: '',
-      avatar: 0
+      email: '',
+      password: '',
+      avatar: 0,
+      error: false
     };
   }
 
@@ -32,31 +35,45 @@ class SignUp extends React.Component {
     event.preventDefault();
 
     const form = event.target;
-    let { name, secondName, avatar } = this.state;
-    const { setUserData, authenticateUser } = this.props;
+    const { updateUserData, signupUser } = this.props;
+    let { name, email, avatar, password } = this.state;
 
-    // replace with an id from db
-    const tempUserId = Math.floor(Math.random() * 1000000);
-
-    name = capitalizeFirstLetter(name);
-    secondName = capitalizeFirstLetter(secondName);
     avatar = parseInt(avatar, 10);
-    const fullName = `${name} ${secondName}`;
 
-    const userData = {
-      id: tempUserId,
-      name,
-      secondName,
-      fullName,
-      avatar
-    };
+    // Validation must be here
+    name = name.trim();
+    email = email.trim();
 
-    // save in the store
-    setUserData(userData);
-    // temp token for user authentication
-    authenticateUser(fullName);
+    if (name === '' || email === '' || password === '') this.setState({ errors: true });
+    else {
+      // save in the store
+      // const storeUserData = {
+      //   name,
+      //   email,
+      //   avatar
+      // };
 
-    form.reset();
+      // updateUserData(storeUserData);
+
+      // send to the server
+      name = encodeURIComponent(name);
+      email = encodeURIComponent(email);
+      password = encodeURIComponent(password);
+      const serverUserData = `name=${name}&email=${email}&password=${password}&avatar=${avatar}`;
+
+      signupUser(serverUserData);
+
+
+      // authenticateUser(fullName);
+
+      this.setState({
+        name: '',
+        email: '',
+        password: '',
+        avatar: 0
+      });
+      form.reset();
+    }
   }
 
   handleFormChange = (event) => {
@@ -69,7 +86,7 @@ class SignUp extends React.Component {
 
   render() {
     const { in: inProp } = this.props;
-    const { name, secondName, avatar } = this.state;
+    const { name, email, password, avatar, errors } = this.state;
 
     return (
       <CSSTransition
@@ -79,22 +96,30 @@ class SignUp extends React.Component {
       >
         <form onSubmit={this.handleSubmit} className={styles.signUp}>
           <h2>Sign Up</h2>
+
+          {errors && (<p className={styles.error}>Something is wrong</p>)}
+
           <div className={styles.fieldsText}>
             <input
               type="text"
               name="name"
               value={name}
               onChange={this.handleFormChange}
-              placeholder="Your name"
-              required
+              placeholder="Name"
             />
             <input
-              type="text"
-              name="secondName"
-              value={secondName}
+              type="email"
+              name="email"
+              value={email}
               onChange={this.handleFormChange}
-              placeholder="Your second name"
-              required
+              placeholder="Email"
+            />
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={this.handleFormChange}
+              placeholder="Password"
             />
           </div>
           <h3>Select an avatar</h3>
@@ -105,7 +130,7 @@ class SignUp extends React.Component {
                   type="radio"
                   id={`ava-${i + 1}`}
                   name="avatar"
-                  checked={i + 1 == avatar}
+                  checked={i + 1 === parseInt(avatar, 10)}
                   onChange={this.handleFormChange}
                   value={i + 1}
                 />
@@ -124,7 +149,8 @@ class SignUp extends React.Component {
 }
 
 SignUp.propTypes = {
-  setUserData: PropTypes.func.isRequired,
+  updateUserData: PropTypes.func.isRequired,
+  signupUser: PropTypes.func.isRequired,
   authenticateUser: PropTypes.func.isRequired,
   in: PropTypes.bool.isRequired
 };

@@ -6,10 +6,14 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   name: String,
-  password: String,
   email: {
     type: String,
     index: { unique: true }
+  },
+  password: String,
+  avatar: {
+    type: Number,
+    default: 1
   }
 });
 

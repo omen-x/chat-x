@@ -7,7 +7,7 @@ import SignUp from './SignUp';
 import { actions as userActions } from 'client/User'; // eslint-disable-line
 import { Auth, socket } from 'modules'; // eslint-disable-line
 
-const { setUserData } = userActions;
+const { updateUserData, signupUser } = userActions;
 
 
 // extracts logic from SignUp
@@ -16,16 +16,20 @@ class SignUpContainer extends React.Component {
     const { history } = this.props;
 
     Auth.authenticateUser(name);
-    history.push('/');
     socket.connect();
+    history.push('/');
   }
 
   render() {
-    const { setUserData: setUserDataProp, in: inProp } = this.props;
+    const {
+      updateUserData: updateUserDataProp,
+      in: inProp,
+      signupUser: signupUserProp } = this.props;
 
     return (
       <SignUp
-        setUserData={setUserDataProp}
+        updateUserData={updateUserDataProp}
+        signupUser={signupUserProp}
         authenticateUser={this.authenticateUser}
         in={inProp}
       />
@@ -34,7 +38,8 @@ class SignUpContainer extends React.Component {
 }
 
 SignUpContainer.propTypes = {
-  setUserData: PropTypes.func.isRequired,
+  updateUserData: PropTypes.func.isRequired,
+  signupUser: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line
   in: PropTypes.bool.isRequired
 };
@@ -45,8 +50,11 @@ SignUpContainer.defaultProps = {
 
 
 const mapDispatchToProps = dispatch => ({
-  setUserData: (data) => {
-    dispatch(setUserData(data));
+  updateUserData: (data) => {
+    dispatch(updateUserData(data));
+  },
+  signupUser: (userData) => {
+    dispatch(signupUser(userData));
   }
 });
 

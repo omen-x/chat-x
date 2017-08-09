@@ -14,11 +14,20 @@ class Socket {
     } else throw new Error('Socket already defined');
   }
 
+  disconnect() {
+    if (this.socket !== null) this.socket.disconnect();
+  }
+
   getSocket() {
     return this.socket;
   }
+
   on(event, callback) {
-    this.socket.on(event, callback);
+    if (this.socket !== null) this.socket.on(event, callback);
+  }
+
+  emit(event, message) {
+    if (this.socket !== null) this.socket.emit(event, message);
   }
 }
 
