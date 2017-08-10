@@ -11,7 +11,7 @@ class Socket {
   connect() {
     if (this.socket === null) {
       this.socket = io();
-    } else throw new Error('Socket already defined');
+    } else this.socket.connect();
   }
 
   disconnect() {

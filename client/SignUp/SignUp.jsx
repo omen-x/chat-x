@@ -183,6 +183,7 @@ class SignUp extends React.Component {
             }
           </ul>
           <button className="btn-accent">Connect</button>
+          <p></p>
         </form>
       </CSSTransition>
     );

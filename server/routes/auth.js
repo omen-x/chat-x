@@ -26,7 +26,11 @@ router.post('/signup', (req, res) => {
       });
     }
 
-    const token = jwt.sign(user._id, app.get('jwt-secret'), { expiresIn: '4 days' });
+    const payload = {
+      sub: user._id
+    };
+
+    const token = jwt.sign(payload, app.get('jwt-secret'), { expiresIn: '4 days' });
     const userData = {
       id: user._id,
       name: user.name,
@@ -43,12 +47,12 @@ router.post('/signup', (req, res) => {
 });
 
 
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
   const { email, password } = req.body;
 
 
   User.findOne({ email }, (err, user) => {
-    if (err) throw err;
+    if (err) return next(new Error(err));
 
     if (!user) return res.json({ error: 'Incorrect email' });
 
@@ -56,7 +60,11 @@ router.post('/login', (req, res) => {
       if (passwordErr) throw passwordErr;
       if (!correct) return res.json({ error: 'Incorrect password' });
 
-      const token = jwt.sign(user._id, app.get('jwt-secret'), { expiresIn: '4 days' });
+      const payload = {
+        sub: user._id
+      };
+
+      const token = jwt.sign(payload, app.get('jwt-secret'), { expiresIn: '4 days' });
 
       return res.json({
         message: 'Success logging',

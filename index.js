@@ -38,8 +38,10 @@ app.use(bodyParser.json());
 // ========>> ROUTES <<========
 
 const authRoutes = require('./server/routes/auth');
+const apiRoutes = require('./server/routes/api');
 
 app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
 
 
 // ========>> SOCKET.IO <<========

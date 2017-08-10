@@ -67,11 +67,41 @@ const connectUser = () => {
 };
 
 
+const fetchInitData = () => {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      Authorization: `bearer ${Auth.getToken()}`
+    }
+  };
+
+  return (dispatch) => {
+    fetch('/api/chat', requestOptions)
+      .then((res) => {
+        if (res.status !== 200) {
+          const error = res.json().error;
+          throw new Error(error);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        dispatch(updateUserData(data));
+        dispatch(connectUser());
+      })
+      .catch((err) => {
+        console.log(`SignUp request failed: ${err}`);
+      });
+  };
+};
+
+
 // ========>> EXPORTS <<========
 
 export default {
   signupUser,
   connectUser,
   updateUserData,
-  deauthenticateUser
+  deauthenticateUser,
+  fetchInitData
 };
