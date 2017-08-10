@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 
 // ========>> REDUCERS FROM MODULES <<========
@@ -11,5 +12,6 @@ import { user as userReducer } from 'client/User'; // eslint-disable-line
 export default combineReducers({
   user: userReducer,
   messages: streamReducer,
+  router: routerReducer
 });
 

@@ -4,8 +4,7 @@ const userInitState = {
   name: '',
   email: '',
   avatar: 1,
-  isUserConnected: false,
-  isUserAuthenticated: false
+  isUserConnected: false
 };
 
 const user = (state = userInitState, action) => {
@@ -16,13 +15,6 @@ const user = (state = userInitState, action) => {
 
     case 'AUTHENTICATE_USER': {
       return Object.assign({}, state, action.user);
-    }
-
-    case 'DEAUTHENTICATE_USER': {
-      return {
-        ...state,
-        isUserAuthenticated: false
-      };
     }
 
     case 'CONNECT_USER': {

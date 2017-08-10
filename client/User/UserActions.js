@@ -12,20 +12,22 @@ const updateUserData = data => ({
 
 const authenticateUser = (token, user) => {
   Auth.authenticateUser(token);
+  socket.connect();
 
   return (dispatch) => {
-    dispatch(push('/'))
+    dispatch(push('/'));
     dispatch(updateUserData(user));
-  }
+  };
 };
 
 
+// after this action, the store still have a user data
 const deauthenticateUser = () => {
   Auth.deauthenticateUser();
   socket.disconnect();
 
-  return {
-    type: 'DEAUTHENTICATE_USER'
+  return (dispatch) => {
+    dispatch(push('/'));
   };
 };
 
@@ -63,7 +65,6 @@ const connectUser = () => {
     type: 'CONNECT_USER'
   };
 };
-
 
 
 // ========>> EXPORTS <<========

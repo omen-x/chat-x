@@ -16,12 +16,12 @@ router.post('/signup', (req, res) => {
       if (err.name === 'MongoError' && err.code === 11000) {
         // the 11000 Mongo code is for a duplication email error
         // the 409 HTTP status code is for conflict error
-        res.status(409).json({
+        return res.status(409).json({
           error: 'This email is already taken.'
         });
       }
 
-      res.status(400).json({
+      return res.status(400).json({
         error: 'Could not process the form.'
       });
     }
@@ -34,7 +34,7 @@ router.post('/signup', (req, res) => {
       avatar: user.avatar
     };
 
-    res.json({
+    return res.json({
       message: 'Successful registration',
       user: userData,
       token
@@ -50,15 +50,15 @@ router.post('/login', (req, res) => {
   User.findOne({ email }, (err, user) => {
     if (err) throw err;
 
-    if (!user) res.json({ error: 'Incorrect email' });
+    if (!user) return res.json({ error: 'Incorrect email' });
 
-    user.comparePassword(password, (passwordErr, correct) => {
+    return user.comparePassword(password, (passwordErr, correct) => {
       if (passwordErr) throw passwordErr;
-      if (!correct) res.json({ error: 'Incorrect password' });
+      if (!correct) return res.json({ error: 'Incorrect password' });
 
       const token = jwt.sign(user._id, app.get('jwt-secret'), { expiresIn: '4 days' });
 
-      res.json({
+      return res.json({
         message: 'Success logging',
         token
       });

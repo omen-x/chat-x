@@ -1,60 +1,85 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
+import cx from 'classnames';
 
 import styles from './SignUp.sass';
-import { capitalizeFirstLetter } from 'helpers'; // eslint-disable-line
 
-// dude pls
-import avatar1 from 'decor/avatars/ava-1.png'// eslint-disable-line
-import avatar2 from 'decor/avatars/ava-2.png'// eslint-disable-line
-import avatar3 from 'decor/avatars/ava-3.png'// eslint-disable-line
-import avatar4 from 'decor/avatars/ava-4.png'// eslint-disable-line
-import avatar5 from 'decor/avatars/ava-5.png'// eslint-disable-line
+// pls
+import avatar1 from 'decor/avatars/ava-1.png'; // eslint-disable-line
+import avatar2 from 'decor/avatars/ava-2.png'; // eslint-disable-line
+import avatar3 from 'decor/avatars/ava-3.png'; // eslint-disable-line
+import avatar4 from 'decor/avatars/ava-4.png'; // eslint-disable-line
+import avatar5 from 'decor/avatars/ava-5.png'; // eslint-disable-line
 
 const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
 
-import { store } from 'client/index';// eslint-disable-line
 
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
-      email: '',
-      password: '',
-      avatar: 0,
-      error: false
+      loading: false,
+      fields: {
+        name: '',
+        email: '',
+        password: '',
+        avatar: 1
+      },
+      errors: {
+        name: false,
+        email: false,
+        password: false,
+        avatar: false
+      }
     };
   }
 
-  // serializes form data and pass to action
-  // need some validation
+  componentDidMount() {
+    this.nameInput.focus();
+  }
+
+  /**
+   * Validates form fields
+   * @param  {object} fields
+   * @return {bool}
+   */
+  validateForm = (fields) => {
+    let correct = true;
+
+    Object.keys(fields).map((field) => {
+      if (fields[field] === '') {
+        correct = false;
+
+        this.setState(state => ({
+          errors: {
+            ...state.errors,
+            [field]: true
+          }
+        }));
+      }
+    });
+
+    return correct;
+  }
+
+  // serializes data from the form and pass to action
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({ loading: true });
 
     const form = event.target;
-    const { updateUserData, signupUser } = this.props;
-    let { name, email, avatar, password } = this.state;
+    const { signupUser } = this.props;
+    let { name, email, avatar, password } = this.state.fields;
 
+    // normalize
     avatar = parseInt(avatar, 10);
-
-    // Validation must be here
     name = name.trim();
     email = email.trim();
 
-    if (name === '' || email === '' || password === '') this.setState({ errors: true });
-    else {
-      // save in the store
-      // const storeUserData = {
-      //   name,
-      //   email,
-      //   avatar
-      // };
 
-      // updateUserData(storeUserData);
-
+    if (this.validateForm(this.state.fields)) {
       // send to the server
       name = encodeURIComponent(name);
       email = encodeURIComponent(email);
@@ -63,16 +88,18 @@ class SignUp extends React.Component {
 
       signupUser(serverUserData);
 
-
-      // authenticateUser(fullName);
-
+      // reset form
       this.setState({
-        name: '',
-        email: '',
-        password: '',
-        avatar: 0
+        fields: {
+          name: '',
+          email: '',
+          password: '',
+          avatar: 0
+        }
       });
       form.reset();
+    } else {
+      this.setState({ loading: false });
     }
   }
 
@@ -81,12 +108,23 @@ class SignUp extends React.Component {
     const name = target.name;
     const value = target.value;
 
-    this.setState({ [name]: value });
+    this.setState(state => ({
+      fields: {
+        ...state.fields,
+        [name]: value
+      },
+      errors: {
+        ...state.errors,
+        [name]: false
+      }
+    }));
   }
 
   render() {
     const { in: inProp } = this.props;
-    const { name, email, password, avatar, errors } = this.state;
+    const { errors, loading } = this.state;
+    const { name, email, password, avatar } = this.state.fields;
+    const formStyles = cx(styles.signUp, { [styles.signUp_loading]: loading });
 
     return (
       <CSSTransition
@@ -94,32 +132,35 @@ class SignUp extends React.Component {
         timeout={2500}
         classNames="fadeToBottom"
       >
-        <form onSubmit={this.handleSubmit} className={styles.signUp}>
+        <form onSubmit={this.handleSubmit} className={formStyles}>
           <h2>Sign Up</h2>
-
-          {errors && (<p className={styles.error}>Something is wrong</p>)}
-
           <div className={styles.fieldsText}>
             <input
               type="text"
               name="name"
+              className={errors.name && styles.errorField}
               value={name}
               onChange={this.handleFormChange}
               placeholder="Name"
+              ref={(input) => { this.nameInput = input; }}
             />
             <input
               type="email"
               name="email"
+              className={errors.email && styles.errorField}
               value={email}
               onChange={this.handleFormChange}
               placeholder="Email"
+              ref={(input) => { this.emailInput = input; }}
             />
             <input
               type="password"
               name="password"
+              className={errors.password && styles.errorField}
               value={password}
               onChange={this.handleFormChange}
               placeholder="Password"
+              ref={(input) => { this.passwordInput = input; }}
             />
           </div>
           <h3>Select an avatar</h3>
@@ -149,10 +190,12 @@ class SignUp extends React.Component {
 }
 
 SignUp.propTypes = {
-  updateUserData: PropTypes.func.isRequired,
   signupUser: PropTypes.func.isRequired,
-  authenticateUser: PropTypes.func.isRequired,
   in: PropTypes.bool.isRequired
+};
+
+SignUp.defaultProps = {
+  in: false
 };
 
 
