@@ -54,11 +54,11 @@ router.post('/login', (req, res, next) => {
   User.findOne({ email }, (err, user) => {
     if (err) return next(new Error(err));
 
-    if (!user) return res.json({ error: 'Incorrect email' });
+    if (!user) return res.status(401).json({ error: 'Incorrect email' });
 
     return user.comparePassword(password, (passwordErr, correct) => {
-      if (passwordErr) throw passwordErr;
-      if (!correct) return res.json({ error: 'Incorrect password' });
+      if (passwordErr) return next(new Error(passwordErr));
+      if (!correct) return res.status(401).json({ error: 'Incorrect password' });
 
       const payload = {
         sub: user._id

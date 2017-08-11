@@ -1,0 +1,40 @@
+@import '~cssVars'
+
+
+.login
+  composes: signUp from '../SignUp/SignUp.sass'
+
+.fieldsText
+  composes: fieldsText from '../SignUp/SignUp.sass'
+
+.error
+  composes: error from '../SignUp/SignUp.sass'
+
+.errorField
+  box-shadow: 0 0 0 1px rgba(#f00, .5)
+
+.loginLink
+  display: block
+  margin-top: 30px
+  text-align: center
+  font-weight: 500
+  color: $c-text
+  transition: color .2s
+
+  &:hover
+    color: $c-accent
+
+.login_loading:after :global
+  content: ''
+  display: block
+  position: absolute
+  z-index: 5
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background-color: rgba(#FFF, .5)
+  background-image: url('~decor/loader.gif')
+  background-position: center
+  background-repeat: no-repeat
+

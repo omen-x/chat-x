@@ -6,10 +6,17 @@ import SignUp from './SignUp';
 
 describe('SignUp component', () => {
   const signupUser = jest.fn();
+  const showLoader = jest.fn();
+  const hideLoader = jest.fn();
+  const hideFormError = jest.fn();
   const props = {
     signupUser,
+    showLoader,
+    hideLoader,
+    hideFormError,
     in: true,
-    errorMessage: ''
+    errorMessage: '',
+    loading: false
   };
   const wrapper = mount(<SignUp {...props} />);
   const form = wrapper.find('form');
