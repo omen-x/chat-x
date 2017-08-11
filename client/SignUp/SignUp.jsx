@@ -121,7 +121,7 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const { in: inProp } = this.props;
+    const { in: inProp, errorMessage } = this.props;
     const { errors, loading } = this.state;
     const { name, email, password, avatar } = this.state.fields;
     const formStyles = cx(styles.signUp, { [styles.signUp_loading]: loading });
@@ -134,6 +134,9 @@ class SignUp extends React.Component {
       >
         <form onSubmit={this.handleSubmit} className={formStyles}>
           <h2>Sign Up</h2>
+
+          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+
           <div className={styles.fieldsText}>
             <input
               type="text"
@@ -183,7 +186,6 @@ class SignUp extends React.Component {
             }
           </ul>
           <button className="btn-accent">Connect</button>
-          <p></p>
         </form>
       </CSSTransition>
     );
@@ -191,6 +193,7 @@ class SignUp extends React.Component {
 }
 
 SignUp.propTypes = {
+  errorMessage: PropTypes.string.isRequired,
   signupUser: PropTypes.func.isRequired,
   in: PropTypes.bool.isRequired
 };

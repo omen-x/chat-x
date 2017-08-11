@@ -8,7 +8,8 @@ describe('SignUp component', () => {
   const signupUser = jest.fn();
   const props = {
     signupUser,
-    in: true
+    in: true,
+    errorMessage: ''
   };
   const wrapper = mount(<SignUp {...props} />);
   const form = wrapper.find('form');

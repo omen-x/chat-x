@@ -3,9 +3,9 @@ import { routerReducer } from 'react-router-redux';
 
 
 // ========>> REDUCERS FROM MODULES <<========
-import { messages as streamReducer } from 'client/Stream'; // eslint-disable-line
-import { user as userReducer } from 'client/User'; // eslint-disable-line
-import { signUp as signUpReducer } from 'client/SignUp'; // eslint-disable-line
+import { reducer as streamReducer } from 'client/Stream'; // eslint-disable-line
+import { reducer as userReducer } from 'client/User'; // eslint-disable-line
+import { reducer as signUpReducer } from 'client/SignUp'; // eslint-disable-line
 
 
 // ========>> COMBINE REDUCERS <<========

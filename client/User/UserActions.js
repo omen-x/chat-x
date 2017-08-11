@@ -1,4 +1,5 @@
 import { push } from 'react-router-redux';
+
 import { Auth, socket } from 'modules'; // eslint-disable-line
 
 
@@ -29,37 +30,6 @@ const deauthenticateUser = () => {
   return (dispatch) => {
     dispatch(push('/'));
   };
-};
-
-
-const signupUser = (userData) => {
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-type': 'application/x-www-form-urlencoded'
-    },
-    body: userData
-  };
-
-  return dispatch =>
-    fetch('/auth/signup', requestOptions)
-      .then((res) => {
-        // todo: form errors(additional action)
-        if (res.status !== 200) {
-          // throw new Error('Wrong status code');
-          return res.json().then((error) => {
-            console.log(error);
-          });
-        }
-        else {
-          return res.json().then((data) => {
-            dispatch(authenticateUser(data.token, data.user));
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(`SignUp request failed: ${err}`);
-      });
 };
 
 
@@ -103,7 +73,6 @@ const fetchUserData = () => {
 // ========>> EXPORTS <<========
 
 export default {
-  signupUser,
   connectUser,
   updateUserData,
   authenticateUser,
