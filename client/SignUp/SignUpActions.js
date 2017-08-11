@@ -6,9 +6,23 @@ const { authenticateUser } = userActions;
 
 // ========>> SIGN UP <<========
 
+const showLoader = () => ({
+  type: 'SHOW_LOADER'
+});
+
+
+const hideLoader = () => ({
+  type: 'HIDE_LOADER'
+});
+
+
 const setFormError = error => ({
-  type: 'SET_FORM_ERROR_MESSAGE',
+  type: 'SET_FORM_ERROR',
   error
+});
+
+const hideFormError = () => ({
+  type: 'HIDE_FORM_ERROR'
 });
 
 
@@ -25,14 +39,16 @@ const signupUser = (userData) => {
     fetch('/auth/signup', requestOptions)
       .then((res) => {
         if (res.status !== 200) {
-          return res.json().then((error) => {
-            // console.log(error);
-            dispatch(setFormError(error));
+          return res.json().then((data) => {
+            dispatch(setFormError(data.error));
           });
         }
         return res.json().then((data) => {
           dispatch(authenticateUser(data.token, data.user));
         });
+      })
+      .then(() => {
+        dispatch(hideLoader());
       })
       .catch((err) => {
         console.log(`SignUp request failed: ${err}`);
@@ -43,6 +59,9 @@ const signupUser = (userData) => {
 // ========>> EXPORT <<========
 
 export default {
+  showLoader,
+  hideLoader,
   setFormError,
+  hideFormError,
   signupUser
 };

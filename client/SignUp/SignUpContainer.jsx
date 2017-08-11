@@ -1,26 +1,34 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import SignUp from './SignUp';
 import { actions as userActions } from 'client/User'; // eslint-disable-line
-import { Auth, socket } from 'modules'; // eslint-disable-line
-import { signupUser } from './SignUpActions';
+import { signupUser, showLoader, hideLoader, hideFormError } from './SignUpActions';
 
 const { updateUserData } = userActions;
 
 
 const mapStateToProps = state => ({
-  errorMessage: state.signUp.errorMessage
+  errorMessage: state.signUp.errorMessage,
+  loading: state.signUp.loading
 });
 
 const mapDispatchToProps = dispatch => ({
+  showLoader: () => {
+    dispatch(showLoader());
+  },
+  hideLoader: () => {
+    dispatch(hideLoader());
+  },
   updateUserData: (data) => {
     dispatch(updateUserData(data));
   },
   signupUser: (userData) => {
     dispatch(signupUser(userData));
+  },
+  hideFormError: () => {
+    dispatch(hideFormError());
   }
 });
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUp));
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

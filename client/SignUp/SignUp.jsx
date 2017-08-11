@@ -20,7 +20,6 @@ class SignUp extends React.Component {
     super(props);
 
     this.state = {
-      loading: false,
       fields: {
         name: '',
         email: '',
@@ -41,7 +40,7 @@ class SignUp extends React.Component {
   }
 
   /**
-   * Validates form fields
+   * Client side validation
    * @param  {object} fields
    * @return {bool}
    */
@@ -67,11 +66,13 @@ class SignUp extends React.Component {
   // serializes data from the form and pass to action
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({ loading: true });
 
     const form = event.target;
-    const { signupUser } = this.props;
+    const { signupUser, showLoader, hideLoader, hideFormError } = this.props;
     let { name, email, avatar, password } = this.state.fields;
+
+    hideFormError();
+    showLoader();
 
     // normalize
     avatar = parseInt(avatar, 10);
@@ -99,7 +100,7 @@ class SignUp extends React.Component {
       });
       form.reset();
     } else {
-      this.setState({ loading: false });
+      hideLoader();
     }
   }
 
@@ -121,8 +122,8 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const { in: inProp, errorMessage } = this.props;
-    const { errors, loading } = this.state;
+    const { in: inProp, errorMessage, loading } = this.props;
+    const { errors } = this.state;
     const { name, email, password, avatar } = this.state.fields;
     const formStyles = cx(styles.signUp, { [styles.signUp_loading]: loading });
 
@@ -193,8 +194,12 @@ class SignUp extends React.Component {
 }
 
 SignUp.propTypes = {
+  loading: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string.isRequired,
   signupUser: PropTypes.func.isRequired,
+  showLoader: PropTypes.func.isRequired,
+  hideLoader: PropTypes.func.isRequired,
+  hideFormError: PropTypes.func.isRequired,
   in: PropTypes.bool.isRequired
 };
 
