@@ -37,6 +37,12 @@ app.use(bodyParser.json());
 
 // ========>> ROUTES <<========
 
+  // api protection
+const authCheck = require('./server/middleware/authCheck.js');
+
+app.get('/apit', authCheck);
+
+
 const authRoutes = require('./server/routes/auth');
 const apiRoutes = require('./server/routes/api');
 
