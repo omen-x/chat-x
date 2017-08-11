@@ -10,9 +10,9 @@ import styles from './Chat.sass';
 
 class Chat extends React.Component {
   componentDidMount() {
-    const { fetchInitData } = this.props;
+    const { fetchUserData } = this.props;
 
-    fetchInitData();
+    fetchUserData();
   }
 
   render() {
@@ -36,7 +36,7 @@ class Chat extends React.Component {
 
 Chat.propTypes = {
   in: PropTypes.bool.isRequired,
-  fetchInitData: PropTypes.func.isRequired
+  fetchUserData: PropTypes.func.isRequired
 };
 
 Chat.defaultProps = {

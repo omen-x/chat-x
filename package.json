@@ -22,21 +22,24 @@
       "browser": true,
       "node": true,
       "es6": true,
-      "jest": true
+      "jest": true,
+      "jest/globals": true
     },
     "globals": {
       "io": true,
-      "app": true
+      "app": true,
+      "mockResponseJson": true
     },
     "parser": "babel-eslint",
     "plugins": [
-      "react"
+      "react",
+      "jest"
     ],
     "ecmaFeatures": {
       "jsx": true,
       "experimentalObjectRestSpread": true
     },
-    "extends": "airbnb",
+    "extends": ["airbnb"],
     "rules": {
       "no-unused-vars": "warn",
       "semi": "warn",
@@ -97,6 +100,7 @@
     "eslint-config-airbnb": "^15.0.1",
     "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-jsx-a11y": "^5.0.1",
     "eslint-plugin-react": "^7.0.1",
     "extract-text-webpack-plugin": "^2.1.2",
@@ -116,6 +120,7 @@
     "postcss-load-config": "^1.2.0",
     "postcss-loader": "^2.0.6",
     "react-test-renderer": "^15.6.1",
+    "redux-mock-store": "^1.2.3",
     "sass-loader": "^6.0.5",
     "sinon": "^2.3.5",
     "style-loader": "^0.18.2",
@@ -130,6 +135,7 @@
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.2",
     "classnames": "^2.2.5",
+    "core-js": "^2.4.1",
     "express": "^4.15.3",
     "history": "^4.6.3",
     "jsonwebtoken": "^7.4.2",
@@ -147,6 +153,7 @@
     "react-transition-group": "^2.1.0",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+    "whatwg-fetch": "^2.0.3"
   }
 }

@@ -18,6 +18,10 @@ class NewMessage extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.msgInput.focus();
+  }
+
   handleChangeText = (event) => {
     const newText = event.target.value;
 
@@ -61,6 +65,7 @@ class NewMessage extends React.Component {
             type="text"
             value={text}
             onChange={this.handleChangeText}
+            ref={(input) => { this.msgInput = input; }}
           />
           <input
             type="submit"

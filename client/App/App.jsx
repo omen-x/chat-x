@@ -5,5 +5,6 @@ import './app.sass';
 import routes from './routes';
 
 
+const App = () => (<BrowserRouter>{routes}</BrowserRouter>);
 
 export default App;

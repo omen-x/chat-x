@@ -41,20 +41,25 @@ const signupUser = (userData) => {
     body: userData
   };
 
-  return (dispatch) => {
+  return dispatch =>
     fetch('/auth/signup', requestOptions)
       .then((res) => {
         // todo: form errors(additional action)
-        if (res.status !== 200) throw new Error('Wrong status code');
-        else return res.json();
-      })
-      .then((data) => {
-        dispatch(authenticateUser(data.token, data.user));
+        if (res.status !== 200) {
+          // throw new Error('Wrong status code');
+          return res.json().then((error) => {
+            console.log(error);
+          });
+        }
+        else {
+          return res.json().then((data) => {
+            dispatch(authenticateUser(data.token, data.user));
+          });
+        }
       })
       .catch((err) => {
         console.log(`SignUp request failed: ${err}`);
       });
-  };
 };
 
 
@@ -67,7 +72,7 @@ const connectUser = () => {
 };
 
 
-const fetchInitData = () => {
+const fetchUserData = () => {
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -76,8 +81,8 @@ const fetchInitData = () => {
     }
   };
 
-  return (dispatch) => {
-    fetch('/api/chat', requestOptions)
+  return dispatch =>
+    fetch('/api/user', requestOptions)
       .then((res) => {
         if (res.status !== 200) {
           const error = res.json().error;
@@ -92,7 +97,6 @@ const fetchInitData = () => {
       .catch((err) => {
         console.log(`SignUp request failed: ${err}`);
       });
-  };
 };
 
 
@@ -102,6 +106,7 @@ export default {
   signupUser,
   connectUser,
   updateUserData,
+  authenticateUser,
   deauthenticateUser,
-  fetchInitData
+  fetchUserData
 };

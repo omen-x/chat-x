@@ -1,5 +1,5 @@
 
-const userInitState = {
+const initState = {
   id: 1,
   name: '',
   email: '',
@@ -7,7 +7,7 @@ const userInitState = {
   isUserConnected: false
 };
 
-const user = (state = userInitState, action) => {
+const user = (state = initState, action) => {
   switch (action.type) {
     case 'UPDATE_USER_DATA': {
       return Object.assign({}, state, action.data);

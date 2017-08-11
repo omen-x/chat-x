@@ -15,7 +15,7 @@ function getUserId(req) {
   return jwt.decode(token).sub;
 }
 
-router.post('/chat', (req, res) => {
+router.post('/user', (req, res) => {
   User.findById(getUserId(req)).then((user) => {
     res.json({
       name: user.name,

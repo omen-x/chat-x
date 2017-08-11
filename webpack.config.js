@@ -18,7 +18,7 @@ const { ifProduction } = getIfUtils(process.env.NODE_ENV);
 const config = {
   entry: removeEmpty({
     // vendor: ['lodash'],
-    'js/app': './client/index.js'
+    'js/app': ['whatwg-fetch', 'core-js/fn/promise', './client/index.js']
   }),
   output: {
     path: path.resolve(__dirname, 'dist'),
