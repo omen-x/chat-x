@@ -39,7 +39,9 @@
       "jsx": true,
       "experimentalObjectRestSpread": true
     },
-    "extends": ["airbnb"],
+    "extends": [
+      "airbnb"
+    ],
     "rules": {
       "no-unused-vars": "warn",
       "semi": "warn",

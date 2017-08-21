@@ -139,7 +139,7 @@ class Login extends React.Component {
             />
           </div>
           <button className="btn-accent">Connect</button>
-          <Link to="/signup" className={styles.loginLink}>
+          <Link to="/" className={styles.loginLink}>
             SignUp
           </Link>
         </form>

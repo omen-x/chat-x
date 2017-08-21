@@ -6,3 +6,6 @@ documents
 docs
 ftpsync.settings
 dist.zip
+*.swp
+*.vim
+dist

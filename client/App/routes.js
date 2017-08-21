@@ -9,23 +9,21 @@ import { Auth } from 'modules'; // eslint-disable-line
 
 
 const routes = (
-  <TransitionGroup>
-    <Switch>
-      <Route
-        path="/"
-        exact
-        render={() => (
-            Auth.isUserAuthenticated() ?
-              <Redirect push to="/chat" /> :
-              <Redirect push to="/signup" />
-
-        )}
-      />
-      <Route path="/chat" component={Chat} />
-      <Route path="/login" component={Login} />
-      <Route path="/signup" component={SignUp} />
-    </Switch>
-  </TransitionGroup>
+  <Switch>
+    <Route
+      path="/"
+      exact
+      render={() => (
+        <TransitionGroup>
+          {Auth.isUserAuthenticated() ?
+            <Chat />:
+            <SignUp />
+          }
+        </TransitionGroup>
+      )}
+    />
+    <Route path="/login" component={Login} />
+  </Switch>
 );
 
 export default routes;

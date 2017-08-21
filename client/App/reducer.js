@@ -16,6 +16,6 @@ export default combineReducers({
   messages: streamReducer,
   signUp: signUpReducer,
   login: loginReducer,
-  router: routerReducer
+  routing: routerReducer
 });
 

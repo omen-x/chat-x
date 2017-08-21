@@ -17,7 +17,7 @@ class Chat extends React.Component {
 
   render() {
     const { in: inProp } = this.props;
-    console.log('in', inProp);
+    const props = this.props;
 
     return (
       <CSSTransition
