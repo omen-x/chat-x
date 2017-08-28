@@ -1,6 +1,8 @@
 @import '~cssVars'
 
 .users
+  display: flex
+  flex-flow: column nowrap
   width: 23%
   flex-shrink: 0
 
@@ -22,7 +24,28 @@
     background-size: 15px auto
     color: #FFF
 
-
 .usersHeader :global
   p
     // background-image: url('./img/users.svg')
+
+.usersList
+  flex-grow: 1
+  background: #FFF
+  border-right: 2px solid #dbdbdb
+
+  li
+    position: relative
+    border-bottom: 1px solid  $c-accent
+    padding: 15px 15px 15px 30px
+
+    &:after
+      content: ''
+      display: block
+      position: absolute
+      top: 50%
+      left: 10px
+      transform: translateY(-50%)
+      width: 10px
+      height: 10px
+      border-radius: 50%
+      background: #2FFF74

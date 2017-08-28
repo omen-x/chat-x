@@ -1,4 +1,3 @@
-// import { socket } from 'modules'; // eslint-disable-line
 import { socket } from 'modules'; // eslint-disable-line
 
 

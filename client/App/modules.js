@@ -8,10 +8,14 @@ class Socket {
     this.socket = null;
   }
 
-  connect() {
-    if (this.socket === null) {
-      this.socket = io();
-    } else this.socket.connect();
+  connect(user) {
+    const query = {
+      name: user.name,
+      avatar: user.avatar
+    };
+
+    if (this.socket === null) this.socket = io('http://localhost:3000/', { query });
+    else this.socket.connect();
   }
 
   disconnect() {

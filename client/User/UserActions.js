@@ -1,9 +1,28 @@
 import { push } from 'react-router-redux';
 
 import { Auth, socket } from 'modules'; // eslint-disable-line
+import { actions as streamActions } from 'client/Stream'; // eslint-disable-line
+
+const { addMessage } = streamActions;
 
 
 // ========>> USER <<========
+
+const connectUser = (user) => {
+  socket.connect(user);
+
+  return (dispatch) => {
+    // attach socket handlers
+    socket.on('new message', (msg) => {
+      dispatch(addMessage(msg));
+    });
+
+    socket.on('online users', (users) => {
+      console.log('users', users);
+    });
+  };
+};
+
 
 const updateUserData = data => ({
   type: 'UPDATE_USER_DATA',
@@ -13,9 +32,11 @@ const updateUserData = data => ({
 
 const authenticateUser = (token, user) => {
   Auth.authenticateUser(token);
-  socket.connect();
+  // socket.connect();
 
   return (dispatch) => {
+    dispatch(connectUser());
+
     dispatch(push('/'));
     dispatch(updateUserData(user));
   };
@@ -29,15 +50,6 @@ const deauthenticateUser = () => {
 
   return (dispatch) => {
     dispatch(push('/'));
-  };
-};
-
-
-const connectUser = () => {
-  socket.connect();
-
-  return {
-    type: 'CONNECT_USER'
   };
 };
 
@@ -62,7 +74,7 @@ const fetchUserData = () => {
       })
       .then((data) => {
         dispatch(updateUserData(data));
-        dispatch(connectUser());
+        dispatch(connectUser(data));
       })
       .catch((err) => {
         console.log(`SignUp request failed: ${err}`);

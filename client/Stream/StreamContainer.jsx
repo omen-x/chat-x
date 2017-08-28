@@ -12,9 +12,9 @@ class StreamContainer extends React.Component {
   componentDidMount() {
     const { addMessage: addMessageProp } = this.props;
 
-    socket.on('new message', (msg) => {
-      addMessageProp(msg);
-    });
+    // socket.on('new message', (msg) => {
+    //   addMessageProp(msg);
+    // });
   }
 
   render() {

@@ -40,7 +40,7 @@ app.use(bodyParser.json());
   // api protection
 const authCheck = require('./server/middleware/authCheck.js');
 
-app.get('/apit', authCheck);
+app.get('/api', authCheck);
 
 
 const authRoutes = require('./server/routes/auth');
@@ -56,8 +56,16 @@ const clients = [];
 
 io.on('connection', (socket) => {
   console.log('a user connected');
+  const { name, avatar } = socket.handshake.query;
+  const newUser = { name, avatar };
 
-  // clients.push(socket);
+
+  clients.push(newUser);
+
+  if (clients.length > 0) {
+    socket.broadcast.emit('online users', clients);
+  }
+
 
   socket.on('disconnect', () => {
     console.log('user disconnected');

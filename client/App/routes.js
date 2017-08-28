@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
 
 import Chat from 'client/Chat'; // eslint-disable-line
@@ -16,7 +16,7 @@ const routes = (
       render={() => (
         <TransitionGroup>
           {Auth.isUserAuthenticated() ?
-            <Chat />:
+            <Chat /> :
             <SignUp />
           }
         </TransitionGroup>
