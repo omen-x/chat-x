@@ -44,7 +44,7 @@ const signupUser = (userData) => {
           });
         }
         return res.json().then((data) => {
-          dispatch(authenticateUser(data.token, data.user));
+          dispatch(authenticateUser(data.token));
         });
       })
       .then(() => {

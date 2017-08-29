@@ -15,7 +15,10 @@ class Socket {
     };
 
     if (this.socket === null) this.socket = io('http://localhost:3000/', { query });
-    else this.socket.connect();
+    else {
+      console.log('plural connection');
+      this.socket.connect();
+    }
   }
 
   disconnect() {

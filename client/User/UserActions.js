@@ -2,8 +2,10 @@ import { push } from 'react-router-redux';
 
 import { Auth, socket } from 'modules'; // eslint-disable-line
 import { actions as streamActions } from 'client/Stream'; // eslint-disable-line
+import { actions as usersActions } from 'client/Users'; // eslint-disable-line
 
 const { addMessage } = streamActions;
+const { addUser, removeUser } = usersActions;
 
 
 // ========>> USER <<========
@@ -12,33 +14,40 @@ const connectUser = (user) => {
   socket.connect(user);
 
   return (dispatch) => {
-    // attach socket handlers
+    // Attach socket handlers
+    // TODO: find a better place to attach handlers
+
     socket.on('new message', (msg) => {
       dispatch(addMessage(msg));
     });
 
-    socket.on('online users', (users) => {
-      console.log('users', users);
+    socket.on('new user logged', (newUser) => {
+      dispatch(addUser(newUser));
+    });
+
+    socket.on('user disconnected', (userId) => {
+      dispatch(removeUser(userId));
     });
   };
 };
 
 
-const updateUserData = data => ({
+const updateUserData = user => ({
   type: 'UPDATE_USER_DATA',
-  data
+  user
 });
 
 
-const authenticateUser = (token, user) => {
+const authenticateUser = (token) => {
   Auth.authenticateUser(token);
   // socket.connect();
 
   return (dispatch) => {
-    dispatch(connectUser());
-
     dispatch(push('/'));
-    dispatch(updateUserData(user));
+
+    // data will be fetched using fetchUserData-action(when chat will be mounted)
+    // dispatch(connectUser(user));
+    // dispatch(updateUserData(user));
   };
 };
 
@@ -72,9 +81,9 @@ const fetchUserData = () => {
         }
         return res.json();
       })
-      .then((data) => {
-        dispatch(updateUserData(data));
-        dispatch(connectUser(data));
+      .then((user) => {
+        dispatch(updateUserData(user));
+        dispatch(connectUser(user));
       })
       .catch((err) => {
         console.log(`SignUp request failed: ${err}`);

@@ -1,6 +1,6 @@
 
 const initState = {
-  id: 1,
+  id: '1',
   name: '',
   email: '',
   avatar: 1,
@@ -10,7 +10,7 @@ const initState = {
 const user = (state = initState, action) => {
   switch (action.type) {
     case 'UPDATE_USER_DATA': {
-      return Object.assign({}, state, action.data);
+      return Object.assign({}, state, action.user);
     }
 
     case 'AUTHENTICATE_USER': {

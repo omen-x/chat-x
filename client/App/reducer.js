@@ -7,6 +7,7 @@ import { reducer as streamReducer } from 'client/Stream'; // eslint-disable-line
 import { reducer as userReducer } from 'client/User'; // eslint-disable-line
 import { reducer as signUpReducer } from 'client/SignUp'; // eslint-disable-line
 import { reducer as loginReducer } from 'client/Login'; // eslint-disable-line
+import { reducer as usersReducer } from 'client/Users'; // eslint-disable-line
 
 
 // ========>> COMBINE REDUCERS <<========
@@ -16,6 +17,7 @@ export default combineReducers({
   messages: streamReducer,
   signUp: signUpReducer,
   login: loginReducer,
+  users: usersReducer,
   routing: routerReducer
 });
 

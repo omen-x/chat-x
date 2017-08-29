@@ -31,16 +31,16 @@ router.post('/signup', (req, res) => {
     };
 
     const token = jwt.sign(payload, app.get('jwt-secret'), { expiresIn: '4 days' });
-    const userData = {
-      id: user._id,
-      name: user.name,
-      email: user.email,
-      avatar: user.avatar
-    };
+    // const userData = {
+    //   id: user._id,
+    //   name: user.name,
+    //   email: user.email,
+    //   avatar: user.avatar
+    // };
 
     return res.json({
       message: 'Successful registration',
-      user: userData,
+      // user: userData,
       token
     });
   });

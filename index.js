@@ -52,32 +52,44 @@ app.use('/api', apiRoutes);
 
 // ========>> SOCKET.IO <<========
 
-const clients = [];
+let onlineUsers = [];
+
 
 io.on('connection', (socket) => {
   console.log('a user connected');
+
   const { name, avatar } = socket.handshake.query;
-  const newUser = { name, avatar };
+  const id = socket.id;
+  const newUser = { id, name, avatar: parseInt(avatar, 10) };
 
 
-  clients.push(newUser);
-
-  if (clients.length > 0) {
-    socket.broadcast.emit('online users', clients);
+  // Send online-users list for the logged user
+  if (onlineUsers.length > 0) {
+    socket.emit('online users', onlineUsers);
   }
 
 
+  // Update online-users
+  onlineUsers.push(newUser);
+  // Inform connected clients about a new user
+  socket.broadcast.emit('new user logged', newUser);
+
+
+  // Disconnect
   socket.on('disconnect', () => {
     console.log('user disconnected');
+
+    // Remove user from online-users
+    onlineUsers = onlineUsers.filter(client => client.id !== id);
+    // Inform connected clients about a disconnected user
+    socket.broadcast.emit('user disconnected', id);
   });
 
+
+  // New message
   socket.on('new message', (msg) => {
     socket.broadcast.emit('new message', msg);
   });
-
-  // socket.on('online users', () => {
-  //   socket.
-  // });
 });
 
 
