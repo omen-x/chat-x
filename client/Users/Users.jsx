@@ -8,7 +8,10 @@ import UsersList from './components/UsersList';
 const Users = ({ users }) => (
   <div className={styles.users}>
     <UsersHeader />
-    <UsersList users={users} />
+    {users.length > 0 ?
+      <UsersList users={users} /> :
+      <p className={styles.emptyText}>Forever alone...</p>
+    }
   </div>
 );
 

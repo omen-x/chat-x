@@ -5,7 +5,7 @@ import { actions as streamActions } from 'client/Stream'; // eslint-disable-line
 import { actions as usersActions } from 'client/Users'; // eslint-disable-line
 
 const { addMessage } = streamActions;
-const { addUser, removeUser } = usersActions;
+const { addUser, removeUser, setUsers } = usersActions;
 
 
 // ========>> USER <<========
@@ -16,6 +16,10 @@ const connectUser = (user) => {
   return (dispatch) => {
     // Attach socket handlers
     // TODO: find a better place to attach handlers
+
+    socket.on('online users', (users) => {
+      dispatch(setUsers(users));
+    });
 
     socket.on('new message', (msg) => {
       dispatch(addMessage(msg));

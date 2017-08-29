@@ -1,25 +1,10 @@
 
-const initialState = [
-  {
-    id: '1',
-    name: 'Corey Taylor',
-    avatar: 1
-  },
-  {
-    id: '2',
-    name: 'Chester Bennington',
-    avatar: 1
-  },
-  {
-    id: '3',
-    name: 'Wayne Static',
-    avatar: 1
-  }
-];
-
-
-const users = (state = initialState, action) => {
+const users = (state = [], action) => {
   switch (action.type) {
+    case 'SET_USERS': {
+      return action.users;
+    }
+
     case 'ADD_USER': {
       return [...state, action.newUser];
     }
