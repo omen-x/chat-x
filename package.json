@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "dev-client": "cross-env NODE_ENV=development nodemon --config nodemon.client.json --watch webpack.config.js --exec  webpack-dev-server",
     "dev-server": "nodemon index.js --config nodemon.server.json --exec babel-node",
     "test": "jest --watch"
