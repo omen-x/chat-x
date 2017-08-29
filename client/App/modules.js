@@ -14,7 +14,7 @@ class Socket {
       avatar: user.avatar
     };
 
-    if (this.socket === null) this.socket = io('http://localhost:3000/', { query });
+    if (this.socket === null) this.socket = io(window.location.href, { query });
     else {
       console.log('plural connection');
       this.socket.connect();
