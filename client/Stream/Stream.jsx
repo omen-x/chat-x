@@ -7,18 +7,15 @@ import Message from 'client/Message'; // eslint-disable-line
 import SystemMessage from 'client/SystemMessage'; // eslint-disable-line
 import styles from './Stream.sass';
 
-// Stream of messages
-// TODO:
-// -replays user check (scrolling) with ID
+// Message flow
 
 class Stream extends React.Component {
   componentDidUpdate() {
-    const { userName, messages } = this.props;
-    // author of the last added message
-    const newMessageAuthor = messages.slice(-1)[0].author;
+    const { userId, messages } = this.props;
+    const newMessageAuthorId = messages.slice(-1)[0].authorId;
 
     // if the current user adds a message, scroll down
-    if (userName === newMessageAuthor) this.scrollToBottom();
+    if (userId === newMessageAuthorId) this.scrollToBottom();
   }
 
   scrollToBottom = () => {
@@ -58,7 +55,7 @@ class Stream extends React.Component {
 }
 
 Stream.propTypes = {
-  userName: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
   messages: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

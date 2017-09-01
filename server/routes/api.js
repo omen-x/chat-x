@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
-
 /**
  * Extracts user-id from token
  * @param  {request object} req
@@ -16,14 +15,15 @@ function getUserId(req) {
 }
 
 router.post('/user', (req, res) => {
-  User.findById(getUserId(req)).then((user) => {
+  User.findById(getUserId(req)).then(user => {
+    console.log(user._id);
     res.json({
       name: user.name,
       email: user.email,
-      avatar: user.avatar
+      avatar: user.avatar,
+      id: user._id,
     });
   });
 });
-
 
 module.exports = router;
