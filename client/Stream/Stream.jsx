@@ -4,15 +4,14 @@ import { TransitionGroup } from 'react-transition-group';
 import Scroll from 'react-scroll';
 
 import Message from 'client/Message'; // eslint-disable-line
+import SystemMessage from 'client/SystemMessage'; // eslint-disable-line
 import styles from './Stream.sass';
-
 
 // Stream of messages
 // TODO:
 // -replays user check (scrolling) with ID
 
 class Stream extends React.Component {
-
   componentDidUpdate() {
     const { userName, messages } = this.props;
     // author of the last added message
@@ -24,7 +23,7 @@ class Stream extends React.Component {
 
   scrollToBottom = () => {
     Scroll.animateScroll.scrollToBottom({ containerId: 'stream-container' });
-  }
+  };
 
   render() {
     const { messages } = this.props;
@@ -33,11 +32,16 @@ class Stream extends React.Component {
       <div
         className={styles.stream}
         id="stream-container"
-        ref={(streamRef) => { this.streamRef = streamRef; }}
       >
         <TransitionGroup>
-          {
-            messages.map(msg => (
+          {messages.map(msg => {
+            if (msg.type === 'system') {
+              return (
+                <SystemMessage key={msg.id} text={msg.text} date={msg.date} />
+              );
+            }
+
+            return (
               <Message
                 key={msg.id}
                 author={msg.author}
@@ -45,8 +49,8 @@ class Stream extends React.Component {
                 text={msg.text}
                 date={msg.date}
               />
-            ))
-          }
+            );
+          })}
         </TransitionGroup>
       </div>
     );
@@ -55,14 +59,15 @@ class Stream extends React.Component {
 
 Stream.propTypes = {
   userName: PropTypes.string.isRequired,
-  messages: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    author: PropTypes.string.isRequired,
-    avatar: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
-  })).isRequired
+  messages: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      author: PropTypes.string,
+      avatar: PropTypes.number,
+      text: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };
-
 
 export default Stream;

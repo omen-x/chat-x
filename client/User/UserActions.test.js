@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { updateUserData, fetchUserData, connectUser } from './UserActions';
+import { updateUserData, fetchUserData } from './UserActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

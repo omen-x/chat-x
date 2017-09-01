@@ -1,4 +1,3 @@
-
 const users = (state = [], action) => {
   switch (action.type) {
     case 'SET_USERS': {
@@ -17,6 +16,5 @@ const users = (state = [], action) => {
       return state;
   }
 };
-
 
 export default users;

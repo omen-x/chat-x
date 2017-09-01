@@ -4,12 +4,12 @@ import NewMessage from './NewMessage';
 import { actions as streamActions } from 'client/Stream'; // eslint-disable-line
 
 
-const { newMessage } = streamActions;
+const { composeNewMessage } = streamActions;
 
 
 const mapDispatchToProps = dispatch => ({
   newMessage: (text) => {
-    dispatch(newMessage(text));
+    dispatch(composeNewMessage(text));
   }
 });
 

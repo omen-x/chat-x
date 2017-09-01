@@ -7,7 +7,6 @@ import SignUp from 'client/SignUp'; // eslint-disable-line
 import Login from 'client/Login'; // eslint-disable-line
 import { Auth } from 'modules'; // eslint-disable-line
 
-
 const routes = (
   <Switch>
     <Route
@@ -15,10 +14,7 @@ const routes = (
       exact
       render={() => (
         <TransitionGroup>
-          {Auth.isUserAuthenticated() ?
-            <Chat /> :
-            <SignUp />
-          }
+          {Auth.isUserAuthenticated() ? <Chat /> : <SignUp />}
         </TransitionGroup>
       )}
     />

@@ -17,7 +17,7 @@ describe('User reducer', () => {
     };
     const action = {
       type: 'UPDATE_USER_DATA',
-      data: {
+      user: {
         id: '5',
         name: 'Denis',
         email: 'denis.omen.x@gmail.com',

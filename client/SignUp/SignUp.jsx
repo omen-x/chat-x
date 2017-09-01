@@ -15,7 +15,6 @@ import avatar5 from 'decor/avatars/ava-5.png'; // eslint-disable-line
 
 const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
 
-
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
@@ -25,14 +24,14 @@ class SignUp extends React.Component {
         name: '',
         email: '',
         password: '',
-        avatar: 1
+        avatar: 1,
       },
       errors: {
         name: false,
         email: false,
         password: false,
-        avatar: false
-      }
+        avatar: false,
+      },
     };
   }
 
@@ -45,27 +44,27 @@ class SignUp extends React.Component {
    * @param  {object} fields
    * @return {bool}
    */
-  validateForm = (fields) => {
+  validateForm = fields => {
     let correct = true;
 
-    Object.keys(fields).map((field) => {
+    Object.keys(fields).map(field => {
       if (fields[field] === '') {
         correct = false;
 
         this.setState(state => ({
           errors: {
             ...state.errors,
-            [field]: true
-          }
+            [field]: true,
+          },
         }));
       }
     });
 
     return correct;
-  }
+  };
 
   // serializes data from the form and pass to action
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
     const form = event.target;
@@ -79,7 +78,6 @@ class SignUp extends React.Component {
     avatar = parseInt(avatar, 10);
     name = name.trim();
     email = email.trim();
-
 
     if (this.validateForm(this.state.fields)) {
       // send to the server
@@ -96,14 +94,14 @@ class SignUp extends React.Component {
           name: '',
           email: '',
           password: '',
-          avatar: 1
-        }
+          avatar: 1,
+        },
       });
       form.reset();
     } else hideLoader();
-  }
+  };
 
-  handleFormChange = (event) => {
+  handleFormChange = event => {
     const target = event.target;
     const name = target.name;
     const value = target.value;
@@ -111,14 +109,14 @@ class SignUp extends React.Component {
     this.setState(state => ({
       fields: {
         ...state.fields,
-        [name]: value
+        [name]: value,
       },
       errors: {
         ...state.errors,
-        [name]: false
-      }
+        [name]: false,
+      },
     }));
-  }
+  };
 
   render() {
     const { in: inProp, errorMessage, loading } = this.props;
@@ -127,11 +125,7 @@ class SignUp extends React.Component {
     const formStyles = cx(styles.signUp, { [styles.signUp_loading]: loading });
 
     return (
-      <CSSTransition
-        in={inProp}
-        timeout={2500}
-        classNames="fadeToBottom"
-      >
+      <CSSTransition in={inProp} timeout={2500} classNames="fadeToBottom">
         <form onSubmit={this.handleSubmit} className={formStyles}>
           <h2>Sign Up</h2>
 
@@ -145,7 +139,9 @@ class SignUp extends React.Component {
               value={name}
               onChange={this.handleFormChange}
               placeholder="Name"
-              ref={(input) => { this.nameInput = input; }}
+              ref={input => {
+                this.nameInput = input;
+              }}
             />
             <input
               type="email"
@@ -154,7 +150,9 @@ class SignUp extends React.Component {
               value={email}
               onChange={this.handleFormChange}
               placeholder="Email"
-              ref={(input) => { this.emailInput = input; }}
+              ref={input => {
+                this.emailInput = input;
+              }}
             />
             <input
               type="password"
@@ -163,7 +161,9 @@ class SignUp extends React.Component {
               value={password}
               onChange={this.handleFormChange}
               placeholder="Password"
-              ref={(input) => { this.passwordInput = input; }}
+              ref={input => {
+                this.passwordInput = input;
+              }}
             />
           </div>
           <h3>Select an avatar</h3>
@@ -182,8 +182,7 @@ class SignUp extends React.Component {
                   <img src={ava} alt="avatar" />
                 </label>
               </li>
-              ))
-            }
+            ))}
           </ul>
           <button className="btn-accent">Connect</button>
           <Link to="/login" className={styles.loginLink}>
@@ -202,12 +201,11 @@ SignUp.propTypes = {
   showLoader: PropTypes.func.isRequired,
   hideLoader: PropTypes.func.isRequired,
   hideFormError: PropTypes.func.isRequired,
-  in: PropTypes.bool.isRequired
+  in: PropTypes.bool.isRequired,
 };
 
 SignUp.defaultProps = {
-  in: false
+  in: false,
 };
-
 
 export default SignUp;

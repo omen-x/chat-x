@@ -4,7 +4,7 @@ import { Auth, socket } from 'modules'; // eslint-disable-line
 import { actions as streamActions } from 'client/Stream'; // eslint-disable-line
 import { actions as usersActions } from 'client/Users'; // eslint-disable-line
 
-const { addMessage } = streamActions;
+const { addMessage, composeNewSystemMessage } = streamActions;
 const { addUser, removeUser, setUsers } = usersActions;
 
 
@@ -25,12 +25,14 @@ const connectUser = (user) => {
       dispatch(addMessage(msg));
     });
 
-    socket.on('new user logged', (newUser) => {
+    socket.on('new user connected', (newUser) => {
       dispatch(addUser(newUser));
+      dispatch(composeNewSystemMessage('new user connected', newUser.name));
     });
 
-    socket.on('user disconnected', (userId) => {
+    socket.on('user disconnected', (userId, userName) => {
       dispatch(removeUser(userId));
+      dispatch(composeNewSystemMessage('user disconnected', userName));
     });
   };
 };

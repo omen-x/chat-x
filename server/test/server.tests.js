@@ -1,14 +1,14 @@
-const request = require('supertest');
+// const request = require('supertest');
 
 // console.log(global.app)
 
-describe.('Server', () => {
+describe('Server', () => {
   it('handles auth request', () => {
     request(app)
       .post('/auth/signup')
       .expect('Content-type', '/json/')
       .expect(200)
-      .end((err) => {
+      .end(err => {
         if (err) throw err;
       });
   });

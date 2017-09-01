@@ -11,8 +11,10 @@ import App, { reducer } from 'client/App'; // eslint-disable-line
 const history = createHistory();
 const historyMiddleware = routerMiddleware(history);
 
-export const store = createStore(reducer, applyMiddleware(thunk, historyMiddleware));
-
+export const store = createStore(
+  reducer,
+  applyMiddleware(thunk, historyMiddleware),
+);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -20,5 +22,5 @@ ReactDOM.render(
       <App />
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
