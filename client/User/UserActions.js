@@ -7,25 +7,37 @@ import { actions as usersActions } from 'client/Users'; // eslint-disable-line
 const { addMessage, composeNewSystemMessage } = streamActions;
 const { addUser, removeUser, setUsers } = usersActions;
 
-
 // ========>> USER <<========
 
-const connectUser = (user) => {
+const updateUserData = user => ({
+  type: 'UPDATE_USER_DATA',
+  user,
+});
+
+const connectUser = user => {
   socket.connect(user);
 
-  return (dispatch) => {
+  return dispatch => {
     // Attach socket handlers
     // TODO: find a better place to attach handlers
 
-    socket.on('online users', (users) => {
+    socket.on('connect', () => {
+      dispatch(updateUserData({ isUserConnected: true }));
+    });
+
+    socket.on('disconnect', () => {
+      dispatch(updateUserData({ isUserConnected: false }));
+    });
+
+    socket.on('online users', users => {
       dispatch(setUsers(users));
     });
 
-    socket.on('new message', (msg) => {
+    socket.on('new message', msg => {
       dispatch(addMessage(msg));
     });
 
-    socket.on('new user connected', (newUser) => {
+    socket.on('new user connected', newUser => {
       dispatch(addUser(newUser));
       dispatch(composeNewSystemMessage('new user connected', newUser.name));
     });
@@ -37,18 +49,11 @@ const connectUser = (user) => {
   };
 };
 
-
-const updateUserData = user => ({
-  type: 'UPDATE_USER_DATA',
-  user
-});
-
-
-const authenticateUser = (token) => {
+const authenticateUser = token => {
   Auth.authenticateUser(token);
   // socket.connect();
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(push('/'));
 
     // data will be fetched using fetchUserData-action(when chat will be mounted)
@@ -57,45 +62,42 @@ const authenticateUser = (token) => {
   };
 };
 
-
 // after this action, the store still have a user data
 const deauthenticateUser = () => {
   Auth.deauthenticateUser();
   socket.disconnect();
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(push('/'));
   };
 };
-
 
 const fetchUserData = () => {
   const requestOptions = {
     method: 'POST',
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
-      Authorization: `bearer ${Auth.getToken()}`
-    }
+      Authorization: `bearer ${Auth.getToken()}`,
+    },
   };
 
   return dispatch =>
     fetch('/api/user', requestOptions)
-      .then((res) => {
+      .then(res => {
         if (res.status !== 200) {
           const error = res.json().error;
           throw new Error(error);
         }
         return res.json();
       })
-      .then((user) => {
+      .then(user => {
         dispatch(updateUserData(user));
         dispatch(connectUser(user));
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(`SignUp request failed: ${err}`);
       });
 };
-
 
 // ========>> EXPORTS <<========
 
@@ -104,5 +106,5 @@ export default {
   updateUserData,
   authenticateUser,
   deauthenticateUser,
-  fetchUserData
+  fetchUserData,
 };

@@ -16,7 +16,6 @@ function getUserId(req) {
 
 router.post('/user', (req, res) => {
   User.findById(getUserId(req)).then(user => {
-    console.log(user._id);
     res.json({
       name: user.name,
       email: user.email,

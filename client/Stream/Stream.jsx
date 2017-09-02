@@ -26,10 +26,7 @@ class Stream extends React.Component {
     const { messages } = this.props;
 
     return (
-      <div
-        className={styles.stream}
-        id="stream-container"
-      >
+      <div className={styles.stream} id="stream-container">
         <TransitionGroup>
           {messages.map(msg => {
             if (msg.type === 'system') {

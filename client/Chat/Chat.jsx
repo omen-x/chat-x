@@ -7,7 +7,6 @@ import Users from 'client/Users'; // eslint-disable-line
 import Dashboard from 'client/Dashboard'; // eslint-disable-line
 import styles from './Chat.sass';
 
-
 class Chat extends React.Component {
   componentDidMount() {
     const { fetchUserData } = this.props;
@@ -15,16 +14,15 @@ class Chat extends React.Component {
     fetchUserData();
   }
 
+  componentWillUnmount() {
+    socket.disconnect();
+  }
+
   render() {
     const { in: inProp } = this.props;
-    const props = this.props;
 
     return (
-      <CSSTransition
-        in={inProp}
-        timeout={2500}
-        classNames="fade"
-      >
+      <CSSTransition in={inProp} timeout={2500} classNames="fadeToTop">
         <div className={styles.chat}>
           <Users />
           <Dashboard />
@@ -34,15 +32,13 @@ class Chat extends React.Component {
   }
 }
 
-
 Chat.propTypes = {
   in: PropTypes.bool.isRequired,
-  fetchUserData: PropTypes.func.isRequired
+  fetchUserData: PropTypes.func.isRequired,
 };
 
 Chat.defaultProps = {
-  in: false
+  in: false,
 };
-
 
 export default Chat;

@@ -1,25 +1,22 @@
-
 const setUsers = users => ({
   type: 'SET_USERS',
-  users
+  users,
 });
 
 const addUser = newUser => ({
   type: 'ADD_USER',
-  newUser
+  newUser,
 });
-
 
 const removeUser = userId => ({
   type: 'REMOVE_USER',
-  userId
+  userId,
 });
-
 
 // ========>> EXPORT <<========
 
 export default {
   setUsers,
   addUser,
-  removeUser
+  removeUser,
 };

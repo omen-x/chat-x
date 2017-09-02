@@ -17,13 +17,6 @@ const user = (state = initState, action) => {
       return Object.assign({}, state, action.user);
     }
 
-    case 'CONNECT_USER': {
-      return {
-        ...state,
-        isUserConnected: true
-      };
-    }
-
     default:
       return state;
   }

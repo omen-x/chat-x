@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import styles from './Users.sass';
 import UsersList from './components/UsersList';
 
-const Users = ({ users }) => (
+const Users = ({ users, loading }) => (
   <div className={styles.users}>
     <UsersHeader />
-    {users.length > 0 ? (
-      <UsersList users={users} />
+    {loading === true ? (
+      <div className="loader" />
     ) : (
-      <p className={styles.emptyText}>Forever alone...</p>
+      <UsersList users={users} />
     )}
   </div>
 );
@@ -23,6 +23,7 @@ Users.propTypes = {
       avatar: PropTypes.number.isRequired,
     }),
   ).isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 // ========>> USERS HEADER <<========

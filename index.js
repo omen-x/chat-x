@@ -79,6 +79,11 @@ io.on('connection', socket => {
   socket.on('new message', msg => {
     socket.broadcast.emit('new message', msg);
   });
+
+  // Online users
+  socket.on('get online users', (cb) => {
+    if (onlineUsers.length > 0) cb(onlineUsers);
+  });
 });
 
 // ========>> LISTEN <<========

@@ -24,6 +24,13 @@
       display: table
       clear: both
 
+  .loader
+    flex-grow: 1
+    background-image: url('./img/decor/loader-main.gif')
+    background-position: center
+    background-repeat: no-repeat
+
+
   //_______ ACCENT BUTTON ________
 
   .btn-accent
@@ -94,3 +101,24 @@
   .fadeToBottom-exit.fadeToBottom-exit-active
     opacity: 0.01
     transition: opacity 300ms ease-in, transform .3s ease-in
+
+
+  // to-right-bounce
+
+  .toRightBounce-enter
+    opacity: 1
+    background-color: rgba(#CECECE, .3)
+
+  .toRightBounce-enter.toRightBounce-enter-active
+    opacity: 1
+    background-color: transparent
+    transition: opacity .35s ease-in, background-color .6s ease-out
+
+  .toRightBounce-exit
+    opacity: 1
+
+  .toRightBounce-exit.toRightBounce-exit-active
+    opacity: 0
+    transition: opacity .35s ease-in, background-color .6s ease-out
+
+
