@@ -8,4 +8,5 @@ Chat app with Socket.io
 - [x] Add support for nicknames
 - [ ] Add “{user} is typing” functionality
 - [x] Show who’s online
+- [ ] Deleting messages 
 - [ ] Add private messaging
