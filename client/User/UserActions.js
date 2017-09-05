@@ -95,7 +95,7 @@ const fetchUserData = () => {
         dispatch(connectUser(user));
       })
       .catch(err => {
-        console.log(`SignUp request failed: ${err}`);
+        console.log(`fetchUserData request failed: ${err}`);
       });
 };
 

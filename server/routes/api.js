@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('mongoose').model('User');
+const Message = require('mongoose').model('Message');
 const jwt = require('jsonwebtoken');
 
 const router = express.Router();
@@ -22,6 +23,12 @@ router.post('/user', (req, res) => {
       avatar: user.avatar,
       id: user._id,
     });
+  });
+});
+
+router.post('/messages', (req, res) => {
+  Message.find({ type: 'user' }).then(messages => {
+    res.json(messages);
   });
 });
 

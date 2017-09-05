@@ -1,8 +1,13 @@
-import { socket } from 'modules'; // eslint-disable-line
+import { socket, Auth } from 'modules'; // eslint-disable-line
 
 const addMessage = (message = {}) => ({
   type: 'ADD_MESSAGE',
   message,
+});
+
+const addMessages = (messages = []) => ({
+  type: 'ADD_MESSAGES',
+  messages,
 });
 
 // composes a new message from current user
@@ -61,8 +66,36 @@ const composeNewSystemMessage = (messageSubject = '', data) => {
   };
 };
 
+const fetchMessages = () => {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded',
+      Authorization: `bearer ${Auth.getToken()}`,
+    },
+  };
+
+  return dispatch =>
+    fetch('/api/messages', requestOptions)
+      .then(res => {
+        if (res.status !== 200) {
+          const error = res.json().error;
+          throw new Error(error);
+        }
+        return res.json();
+      })
+      .then(messages => {
+        dispatch(addMessages(messages));
+      })
+      .catch(err => {
+        console.log(`fetchMessages request failed: ${err}`);
+      });
+};
+
+
 export default {
   addMessage,
   composeNewMessage,
   composeNewSystemMessage,
+  fetchMessages,
 };

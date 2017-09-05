@@ -33,6 +33,10 @@ const messages = (state = initialState, action) => {
       return [...state, action.message];
     }
 
+    case 'ADD_MESSAGES': {
+      return [...state, ...action.messages];
+    }
+
     default:
       return state;
   }
