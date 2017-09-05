@@ -16,8 +16,8 @@ const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
 
 // Single message
 
-const Message = ({ author, avatar, text, date, in: inProp, userName }) => {
-  const isCurrentUser = userName === author;
+const Message = ({ userId, author, authorId, authorAvatar, text, date, in: inProp }) => {
+  const isCurrentUser = userId === authorId;
   const authorClassName = cx(styles.author, { [styles.author_current]: isCurrentUser });
 
   return (
@@ -28,7 +28,7 @@ const Message = ({ author, avatar, text, date, in: inProp, userName }) => {
     >
       <div className={styles.message}>
         <div className={styles.avatar}>
-          <img src={avatars[avatar - 1]} alt="User avatar" />
+          <img src={avatars[authorAvatar - 1]} alt="User avatar" />
         </div>
         <div className={styles.content}>
           <p className={authorClassName}>{author}</p>
@@ -41,11 +41,12 @@ const Message = ({ author, avatar, text, date, in: inProp, userName }) => {
 };
 
 Message.propTypes = {
+  userId: string.isRequired,
   author: string.isRequired,
-  avatar: number.isRequired,
+  authorId: string.isRequired,
+  authorAvatar: number.isRequired,
   text: string.isRequired,
   date: string.isRequired,
-  userName: string.isRequired,
   in: bool.isRequired
 };
 

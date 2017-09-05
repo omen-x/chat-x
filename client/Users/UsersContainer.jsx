@@ -20,9 +20,7 @@ class UsersContainer extends React.Component {
 
     socket.emit('get online users', users => {
       setUsersProp(users);
-      setTimeout(() => {
-        this.setState({ loading: false });
-      }, 800);
+      this.setState({ loading: false });
     });
   }
 

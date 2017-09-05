@@ -39,7 +39,8 @@ class Stream extends React.Component {
               <Message
                 key={msg.id}
                 author={msg.author}
-                avatar={msg.avatar}
+                authorId={msg.authorId}
+                authorAvatar={msg.authorAvatar}
                 text={msg.text}
                 date={msg.date}
               />
@@ -55,9 +56,10 @@ Stream.propTypes = {
   userId: PropTypes.string.isRequired,
   messages: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
       author: PropTypes.string,
-      avatar: PropTypes.number,
+      authorId: PropTypes.string,
+      authorAvatar: PropTypes.number,
       text: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
     }),

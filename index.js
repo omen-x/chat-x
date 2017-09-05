@@ -45,6 +45,8 @@ app.use('/api', apiRoutes);
 
 // ========>> SOCKET.IO <<========
 
+const Message = require('mongoose').model('Message');
+
 let onlineUsers = [];
 
 io.on('connection', socket => {
@@ -77,12 +79,29 @@ io.on('connection', socket => {
 
   // New message
   socket.on('new message', msg => {
-    socket.broadcast.emit('new message', msg);
+    // socket.broadcast.emit('new message', msg);
+    const newMessage = new Message(msg);
+
+    newMessage.save((err, message) => {
+      const { _id, type, date, text, author, authorId, authorAvatar } = message;
+
+      io.emit('new message', {
+        id: _id,
+        type,
+        date,
+        text,
+        author,
+        authorId,
+        authorAvatar,
+      });
+    });
   });
 
   // Online users
-  socket.on('get online users', (cb) => {
-    if (onlineUsers.length > 0) cb(onlineUsers);
+  socket.on('get online users', cb => {
+    const otherUsers = onlineUsers.filter(client => client.id !== id);
+
+    cb(otherUsers);
   });
 });
 

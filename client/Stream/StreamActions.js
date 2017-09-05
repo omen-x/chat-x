@@ -15,17 +15,18 @@ const composeNewMessage = (text = '') => {
   });
 
   return (dispatch, getState) => {
-    const { avatar, name, id: authorId } = getState().user;
+    const { avatar: authorAvatar, name, id: authorId } = getState().user;
     const author = name;
-    const id = Math.floor(Math.random() * 1000000);
+    // const id = Math.floor(Math.random() * 1000000);
     const type = 'user';
-    const message = { id, author, authorId, avatar, text, date, type };
+    const messageData = { author, authorId, authorAvatar, text, date, type };
 
-    // send to server
-    socket.emit('new message', message);
-
-    // save in store
-    dispatch(addMessage(message));
+    // send to server (we must retrieve an _id for the message)
+    // socket.emit('new message', messageData, (message) => {
+    //   // save in store
+    //   dispatch(addMessage(message));
+    // });
+    socket.emit('new message', messageData);
   };
 };
 
@@ -34,7 +35,7 @@ const composeNewSystemMessage = (messageSubject = '', data) => {
     hour: 'numeric',
     minute: 'numeric',
   });
-  const id = Math.floor(Math.random() * 1000000);
+  const id = String(Math.floor(Math.random() * 1000000));
   const type = 'system';
   let text = '';
 
