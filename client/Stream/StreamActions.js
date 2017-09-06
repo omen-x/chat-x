@@ -10,31 +10,6 @@ const addMessages = (messages = []) => ({
   messages,
 });
 
-// composes a new message from current user
-// we'll use redux-thunk to access user info(avatar, name)
-// and call another action with a composed message
-const composeNewMessage = (text = '') => {
-  const date = new Date().toLocaleTimeString('en-GB', {
-    hour: 'numeric',
-    minute: 'numeric',
-  });
-
-  return (dispatch, getState) => {
-    const { avatar: authorAvatar, name, id: authorId } = getState().user;
-    const author = name;
-    // const id = Math.floor(Math.random() * 1000000);
-    const type = 'user';
-    const messageData = { author, authorId, authorAvatar, text, date, type };
-
-    // send to server (we must retrieve an _id for the message)
-    // socket.emit('new message', messageData, (message) => {
-    //   // save in store
-    //   dispatch(addMessage(message));
-    // });
-    socket.emit('new message', messageData);
-  };
-};
-
 const composeNewSystemMessage = (messageSubject = '', data) => {
   const date = new Date().toLocaleTimeString('en-GB', {
     hour: 'numeric',
@@ -70,7 +45,7 @@ const fetchMessages = () => {
   const requestOptions = {
     method: 'POST',
     headers: {
-      'Content-type': 'application/x-www-form-urlencoded',
+      // 'Content-type': 'application/x-www-form-urlencoded',
       Authorization: `bearer ${Auth.getToken()}`,
     },
   };
@@ -92,10 +67,8 @@ const fetchMessages = () => {
       });
 };
 
-
 export default {
   addMessage,
-  composeNewMessage,
   composeNewSystemMessage,
   fetchMessages,
 };

@@ -1,8 +1,7 @@
 import React from 'react';
-import { func } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import styles from './NewMessage.sass';
-
 
 // TODO: validation for form
 
@@ -13,8 +12,8 @@ class NewMessage extends React.Component {
     this.state = {
       text: '',
       errors: {
-        text: false
-      }
+        text: false,
+      },
     };
   }
 
@@ -22,38 +21,37 @@ class NewMessage extends React.Component {
     this.msgInput.focus();
   }
 
-  handleChangeText = (event) => {
+  handleChangeText = event => {
     const newText = event.target.value;
 
     this.setState(() => ({ text: newText }));
-  }
+  };
 
   /**
    * Extract the validation to a pure function
    * @param  {string} text - input value
    * @return {bool}      - validation result
    */
-  validateForm = (text) => {
+  validateForm = text => {
     if (text === '') return false;
     return true;
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
 
-    const { newMessage } = this.props;
+    const { composeNewMessage } = this.props;
     const { text } = this.state;
 
     if (this.validateForm(text)) {
-      newMessage(text);
+      composeNewMessage(text);
       this.setState(() => ({ text: '' }));
     } else {
       this.setState(() => ({
-        errors: { text: true }
+        errors: { text: true },
       }));
     }
-  }
-
+  };
 
   render() {
     const { text } = this.state;
@@ -65,12 +63,11 @@ class NewMessage extends React.Component {
             type="text"
             value={text}
             onChange={this.handleChangeText}
-            ref={(input) => { this.msgInput = input; }}
+            ref={input => {
+              this.msgInput = input;
+            }}
           />
-          <input
-            type="submit"
-            value=""
-          />
+          <input type="submit" value="" />
         </form>
       </div>
     );
@@ -78,8 +75,7 @@ class NewMessage extends React.Component {
 }
 
 NewMessage.propTypes = {
-  newMessage: func.isRequired
+  composeNewMessage: PropTypes.func.isRequired,
 };
-
 
 export default NewMessage;
