@@ -1,7 +1,5 @@
 # chat-x
-Chat app with Socket.io
-
-#### Current demo - [https://chat--x.herokuapp.com/](https://chat--x.herokuapp.com/)
+Chat app built on Socket.io
 
 ## Tasks
 - [x] Broadcast a message to connected users when someone connects or disconnects
