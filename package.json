@@ -145,7 +145,7 @@
     "history": "^4.6.3",
     "jsonwebtoken": "^7.4.2",
     "lodash": "^4.17.4",
-    "mongoose": "^4.11.6",
+    "mongoose": "^5.7.5",
     "node-notifier": "^5.1.2",
     "pretty": "^2.0.0",
     "prop-types": "^15.5.10",
